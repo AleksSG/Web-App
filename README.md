@@ -24,7 +24,7 @@ The user can sing up and log in to a personal space with its information and som
 Moreover, we will use a Free API such as YouTube or SoundCloud to allow the possibility to reproduce the content.
 
 ### Contributors
-* Albert Planes
+* Albert Planes - [Github: Apseuma](http://github.com/Apseuma)
 * Aleks Genov - [Github: AleksSG](http://github.com/AleksSG)
 * Miquel Ribes
 * Paula Vicente
