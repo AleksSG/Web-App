@@ -27,5 +27,5 @@ Moreover, we will use a Free API such as YouTube or SoundCloud to allow the poss
 * Albert Planes - [Github: Apseuma](http://github.com/Apseuma)
 * Aleks Genov - [Github: AleksSG](http://github.com/AleksSG)
 * Miquel Ribes
-* Paula Vicente
-* Sergio Vargas
+* Paula Vicente -
+* Sergio Vargas - [Github: sergiovargaspuy](http://github.com/sergiovargaspuy)
