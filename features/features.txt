@@ -1,2 +1,21 @@
-Register Song
-Create Playlist
+Register Song C
+Register Movie C
+
+Create Playlist C
+Edit Playlist U
+Delete Playlist D
+Share Playlist /*(mostrarho a la nostra pagina de perfil)*/
+
+View Song's Data R
+View Movies's Data R
+
+Rate Song U
+Rate Movie U
+
+View the songs/movies of an artist (singer or director) R
+
+Create user C
+Follow friends C/U
+Unfollow friends D
+
+Create toplist R (en base als ratings)
