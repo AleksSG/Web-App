@@ -1,4 +1,4 @@
-Feature: Register Restaurant
-In order to keep track of the restaurants I visit,
-As a user
-I want to register a restaurant together with its location and contact details.
+Feature: Create User
+In order to create a new instance of user,
+As a anonymous_user
+I want to create a new user with its personal details.
