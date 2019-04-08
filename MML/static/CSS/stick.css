@@ -1,0 +1,22 @@
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+}
+.content {
+  padding: 16px;
+}
+
+.bg-custom {
+  background-color: #faf2f4;
+}
+
+#navbar {
+	z-index: 10;
+}
+
+#p {
+	z-index: 20;
+}

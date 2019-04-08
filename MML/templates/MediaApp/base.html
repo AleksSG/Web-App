@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Base</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/stick.css' %}">
+  </head>
+
+  <body>
+    <div class = "p" style="height: 200px;">
+        
+      <h3>Holaaaaaa</h3>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+      <div class="top_container">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_login' %}">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row" id="p">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut tortor egestas, aliquam leo eget, sagittis eros. Mauris ut semper nunc. Ut nec nisl vitae leo gravida rhoncus a eget nulla. Nulla fringilla ipsum leo, at tempus nulla sollicitudin in. Phasellus eget lacus feugiat, feugiat erat non, varius mi. Cras aliquam ligula enim, sed sodales erat facilisis et. Donec pellentesque felis eget faucibus ullamcorper. Sed a elit convallis, sollicitudin nulla id, volutpat leo. Praesent egestas euismod quam ac gravida. Mauris at lacus euismod, ornare elit in, volutpat felis.
+
+Sed ullamcorper, mauris ac rutrum faucibus, lacus sapien ultrices augue, id tristique leo urna ac dui. Nunc non lobortis lacus, non iaculis elit. Aenean varius sodales magna, non dignissim risus lacinia eget. Integer quis est sit amet arcu accumsan maximus ultricies in odio. Sed vel est auctor nisi tincidunt ullamcorper id ut enim. Vestibulum vitae venenatis urna. Sed pharetra dolor eu magna aliquam, in hendrerit urna venenatis. Vestibulum eget nisl est.
+
+Nam placerat mattis mauris eget vestibulum. Nullam mattis mollis est, quis dictum nulla aliquet vel. Sed ac tortor nisl. Suspendisse hendrerit lacus purus, vitae varius neque viverra et. Vestibulum quam orci, malesuada sollicitudin erat a, luctus efficitur odio. Donec lorem enim, suscipit sit amet congue in, iaculis non mi. Integer at scelerisque erat. Nulla porta dolor et libero venenatis fringilla sed ut purus. Morbi varius imperdiet nibh. Sed tempus a nisi a finibus. Mauris tristique gravida vestibulum. Morbi iaculis, mauris sit amet dignissim porttitor, purus risus egestas sapien, at iaculis ipsum dui vitae ligula.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut tortor egestas, aliquam leo eget, sagittis eros. Mauris ut semper nunc. Ut nec nisl vitae leo gravida rhoncus a eget nulla. Nulla fringilla ipsum leo, at tempus nulla sollicitudin in. Phasellus eget lacus feugiat, feugiat erat non, varius mi. Cras aliquam ligula enim, sed sodales erat facilisis et. Donec pellentesque felis eget faucibus ullamcorper. Sed a elit convallis, sollicitudin nulla id, volutpat leo. Praesent egestas euismod quam ac gravida. Mauris at lacus euismod, ornare elit in, volutpat felis.
+
+Sed ullamcorper, mauris ac rutrum faucibus, lacus sapien ultrices augue, id tristique leo urna ac dui. Nunc non lobortis lacus, non iaculis elit. Aenean varius sodales magna, non dignissim risus lacinia eget. Integer quis est sit amet arcu accumsan maximus ultricies in odio. Sed vel est auctor nisi tincidunt ullamcorper id ut enim. Vestibulum vitae venenatis urna. Sed pharetra dolor eu magna aliquam, in hendrerit urna venenatis. Vestibulum eget nisl est.
+
+Nam placerat mattis mauris eget vestibulum. Nullam mattis mollis est, quis dictum nulla aliquet vel. Sed ac tortor nisl. Suspendisse hendrerit lacus purus, vitae varius neque viverra et. Vestibulum quam orci, malesuada sollicitudin erat a, luctus efficitur odio. Donec lorem enim, suscipit sit amet congue in, iaculis non mi. Integer at scelerisque erat. Nulla porta dolor et libero venenatis fringilla sed ut purus. Morbi varius imperdiet nibh. Sed tempus a nisi a finibus. Mauris tristique gravida vestibulum. Morbi iaculis, mauris sit amet dignissim porttitor, purus risus egestas sapien, at iaculis ipsum dui vitae ligula.
+        </p>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="container">
+    {% block body_block %}
+    {% endblock %}
+    </div>
+    <script type="text/javascript" src="{% static 'JS/sticky.js' %}"></script>
+  </body>
+</html>
