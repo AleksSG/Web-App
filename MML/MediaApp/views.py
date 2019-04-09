@@ -30,7 +30,7 @@ def register(request):
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
-            
+
             profile.save()
             registered = True
         else:
@@ -60,4 +60,3 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'MediaApp/login.html', {})
-
