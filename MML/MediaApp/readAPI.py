@@ -10,8 +10,8 @@ def main():
     for group in groups:
         printOneGroupSongs(group)
 
-#    for director in directors:
-#        printOneDirectorMovies(director)
+    for director in directors:
+        printOneDirectorMovies(director)
 
 def printOneGroupSongs(group):
     print("----------------"+group+"----------------")
