@@ -20,6 +20,9 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+def generate(request):
+    return render(request,'MediaApp/generate.html')
+
 def register(request):
     registered = False
     if request.method == 'POST':
