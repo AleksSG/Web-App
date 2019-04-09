@@ -18,6 +18,9 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+def generate(request):
+    return render(request,'MediaApp/generate.html')
+
 def register(request):
     registered = False
     if request.method == 'POST':
@@ -30,7 +33,7 @@ def register(request):
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
-            
+
             profile.save()
             registered = True
         else:
@@ -60,4 +63,3 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'MediaApp/login.html', {})
-
