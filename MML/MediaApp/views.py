@@ -62,9 +62,6 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'MediaApp/login.html', {})
-<<<<<<< HEAD
-=======
-
 
 class GroupListView(generic.ListView):
     model = Group
@@ -72,10 +69,8 @@ class GroupListView(generic.ListView):
 class DirectorListView(generic.ListView):
     model = Director
 
-class MovieListView(generic.ListView):
+class MovieListView(generic.DetailView):
     model = Movie
 
-class SongListView(generic.ListView):
+class SongListView(generic.DetailView):
     model = Song
-
->>>>>>> ff10a9e632769cb23b6dd1a2e453fcfce2dbfeb7
