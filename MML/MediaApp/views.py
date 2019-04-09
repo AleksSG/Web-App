@@ -28,30 +28,65 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
-def generate(request):
-    directors=['Tim Burton','Martin Scorsese','Steven Spielberg','Joe Russo','Quentin Tarantino']
-    for director in directors:
-        direc = Director(name= director)
-        direc.save()
+#def generate(request): #movie
+#    directors=['Tim Burton','Martin Scorsese','Steven Spielberg','Joe Russo','Quentin Tarantino']
+#    for director in directors:
+#        direc = Director(name= director)
+#        direc.save()
+#
+#        director=director.lower()
+#        director=director.replace(" ", "+")
+#
+#        a = 'https://itunes.apple.com/search?entity=movie&term='
+#        a = a + director
+#        b = requests.get(a).json()
+#        #pelis=json.dumps(b, indent=2)
+#        pelis=b['results']
+#        for i in pelis:
+#            d=''
+#            if 'shortDescription' in i:
+#                d = i['shortDescription']
+#
+#            mov = Movie(name= i['trackName'], director= direc, release_date= i['releaseDate'][:10], genre= i['primaryGenreName'], description= d, url_info= i['trackViewUrl'])
+#            mov.save()
+#            #print(pelis[i]['longDescription']+" - ",end="")
+#
+#    return render(request,'MediaApp/generate.html')
 
-        director=director.lower()
-        director=director.replace(" ", "+")
 
-        a = 'https://itunes.apple.com/search?entity=movie&term='
-        a = a + director
+def generate(request): #songs
+    groups=['Vicetone','Melendi','Els amics de les arts','Miley Cyrus','Ariana Grande','Ed Sheeran', 'Shawn Mendes']
+    for group in groups:
+        lowgroup=group.lower()
+        lowgroup=lowgroup.replace(" ", "+")
+
+        a = 'https://itunes.apple.com/search?entity=song&term='
+        a = a + lowgroup
         b = requests.get(a).json()
         #pelis=json.dumps(b, indent=2)
-        pelis=b['results']
-        for i in pelis:
-            d=''
-            if 'shortDescription' in i:
-                d = i['shortDescription']
+        songs=b['results']
 
-            mov = Movie(name= i['trackName'], director= direc, release_date= i['releaseDate'][:10], genre= i['primaryGenreName'], description= d, url_info= i['trackViewUrl'])
-            mov.save()
-            #print(pelis[i]['longDescription']+" - ",end="")
+        artUrl=''
+        bool=0
+        for i in songs:
+            if ('artistViewUrl' in i) and (bool==0):
+                artUrl=i['artistViewUrl']
+                bool=1
+
+        gr = Group(name = group, url_info = artUrl)
+        gr.save()
+
+        for i in songs:
+            alb=''
+            if 'collectionName' in i:
+                alb = i['collectionName']
+
+            son = Song(name= i['trackName'], group = gr, album = alb, release_date= i['releaseDate'][:10], genre= i['primaryGenreName'], url_info= i['trackViewUrl'])
+            son.save()
 
     return render(request,'MediaApp/generate.html')
+
+
 
 def register(request):
     registered = False
@@ -77,6 +112,7 @@ def register(request):
                           {'user_form':user_form,
                            'profile_form':profile_form,
                            'registered':registered})
+
 
 def user_login(request):
     if request.user.is_authenticated:

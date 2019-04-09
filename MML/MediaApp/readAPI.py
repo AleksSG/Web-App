@@ -23,14 +23,17 @@ def printOneGroupSongs(group):
     b = requests.get(a).json()
     #pelis=json.dumps(b, indent=2)
     songs=b['results']
+    if b['resultCount']>0:
+        print("artistaaaaaaaaa"+songs[0]['artistViewUrl'])
+
     for i in range(b['resultCount']):
+        print(songs[i])
         print(songs[i]['trackName']+" - ",end="")
         print(songs[i]['artistName']+" - ",end="")
         print(songs[i]['collectionName']+" - ",end="")
         print(songs[i]['releaseDate'][:10]+" - ",end="")
         print(songs[i]['primaryGenreName'])
         print("     "+songs[i]['trackViewUrl'])
-
 
 def printOneDirectorMovies(director):
     print("----------------"+director+"----------------")
