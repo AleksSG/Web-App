@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 from django.views import generic
 from .models import Group, Director, Movie, Song
 
+import requests
+import json
+
 # Create your views here.
 def index(request):
     return render(request,'MediaApp/index.html')
@@ -21,6 +24,28 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 def generate(request):
+    directors=['Tim Burton','Martin Scorsese','Steven Spielberg','Joe Russo','Quentin Tarantino']
+    for director in directors:
+        direc = Director(name= director)
+        direc.save()
+
+        director=director.lower()
+        director=director.replace(" ", "+")
+
+        a = 'https://itunes.apple.com/search?entity=movie&term='
+        a = a + director
+        b = requests.get(a).json()
+        #pelis=json.dumps(b, indent=2)
+        pelis=b['results']
+        for i in pelis:
+            d=''
+            if 'shortDescription' in i:
+                d = i['shortDescription']
+
+            mov = Movie(name= i['trackName'], director= direc, release_date= i['releaseDate'][:10], genre= i['primaryGenreName'], description= d, url_info= i['trackViewUrl'])
+            mov.save()
+            #print(pelis[i]['longDescription']+" - ",end="")
+
     return render(request,'MediaApp/generate.html')
 
 def register(request):

@@ -28,10 +28,7 @@ urlpatterns = [
     url(r'^special/',views.special,name='special'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^generate/$',views.generate,name='generate'),
-<<<<<<< HEAD
 
-=======
->>>>>>> 91755c566043fee16bdb2a8946893346be59ff60
     url(r'^group/$', views.GroupListView.as_view(), name='Group'),
     url(r'^director/$', views.DirectorListView.as_view(), name='Director'),
     url(r'^movie/$', views.MovieListView.as_view(), name='Movie'),
