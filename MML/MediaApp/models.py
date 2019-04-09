@@ -34,7 +34,6 @@ class Song(models.Model):
     album = models.CharField(max_length=200)
     release_date = models.DateField(default=date.today)
     genre = models.CharField(max_length=50)
-    description = models.CharField(max_length=300)
     url_info = models.URLfield(max_length=200)
 
     def __str__(self):
