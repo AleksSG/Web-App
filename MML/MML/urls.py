@@ -27,13 +27,9 @@ urlpatterns = [
     url(r'^$',views.index,name='index'),
     url(r'^special/',views.special,name='special'),
     url(r'^logout/$', views.user_logout, name='logout'),
-<<<<<<< HEAD
     url(r'^generate/$',views.generate,name='generate'),
-
-=======
     url(r'^group/$', views.GroupListView.as_view(), name='Group'),
     url(r'^director/$', views.DirectorListView.as_view(), name='Director'),
     url(r'^movie/$', views.MovieListView.as_view(), name='Movie'),
     url(r'^song/$', views.SongListView.as_view(), name='Song'),
->>>>>>> 27369c713fbe51938b4680bbb166d36c47b56292
 ]
