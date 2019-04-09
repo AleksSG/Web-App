@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views import generic
+from .models import Group, Director, Movie, Song
 
 # Create your views here.
 def index(request):
@@ -60,3 +62,20 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'MediaApp/login.html', {})
+<<<<<<< HEAD
+=======
+
+
+class GroupListView(generic.ListView):
+    model = Group
+
+class DirectorListView(generic.ListView):
+    model = Director
+
+class MovieListView(generic.ListView):
+    model = Movie
+
+class SongListView(generic.ListView):
+    model = Song
+
+>>>>>>> ff10a9e632769cb23b6dd1a2e453fcfce2dbfeb7
