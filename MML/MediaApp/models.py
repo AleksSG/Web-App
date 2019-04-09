@@ -6,7 +6,7 @@ from django.urls import reverse
 # Create your models here.
 class Group(models.Model):
     name = models.CharField(max_length=100)
-    url_info = models.URLfield(max_length=200)
+    url_info = models.URLField(max_length=200)
     
     def __str__(self):
         return self.name
@@ -23,7 +23,7 @@ class Movie(models.Model):
     release_date = models.DateField(default=date.today)
     genre = models.CharField(max_length=50)
     description = models.CharField(max_length=300)
-    url_info = models.URLfield(max_length=200)
+    url_info = models.URLField(max_length=200)
 
     def __str__(self):
     	return self.name
@@ -34,7 +34,7 @@ class Song(models.Model):
     album = models.CharField(max_length=200)
     release_date = models.DateField(default=date.today)
     genre = models.CharField(max_length=50)
-    url_info = models.URLfield(max_length=200)
+    url_info = models.URLField(max_length=200)
 
     def __str__(self):
         return self.name
