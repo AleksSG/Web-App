@@ -22,15 +22,17 @@ app_name= 'MediaApp'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^$',views.index,name='index'),
     url(r'^register/$',views.register,name='register'),
     url(r'^user_login/$',views.user_login,name='user_login'),
-    url(r'^$',views.index,name='index'),
     url(r'^special/',views.special,name='special'),
     url(r'^logout/$', views.user_logout, name='logout'),
+    url(r'^profile/(?P<username>\w+)/$',views.profile,name='profile'),
     url(r'^generate/$',views.generate,name='generate'),
 
+    #Are they necessary?
     url(r'^group/$', views.GroupListView.as_view(), name='Group'),
-    url(r'^director/$', views.DirectorListView.as_view(), name='Director'),
+    url(r'^directors/$', views.DirectorListView.as_view(), name='Director'),
     url(r'^movie/$', views.MovieListView.as_view(), name='Movie'),
     url(r'^song/$', views.SongListView.as_view(), name='Song'),
 ]

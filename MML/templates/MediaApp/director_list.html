@@ -1,0 +1,12 @@
+{% extends "MediaApp/index.html" %}
+{% block dir_block %}
+<ul>
+  {% for dir in director_list %}
+  <li>
+    <a href="http://localhost:8000">{{ dir.name }}</a>
+  </li>
+  {% endfor %}
+
+</ul>
+
+{% endblock %}

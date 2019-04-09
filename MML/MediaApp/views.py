@@ -14,6 +14,11 @@ import json
 def index(request):
     return render(request,'MediaApp/index.html')
 
+def profile(request, username):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('user_login'))
+    return render(request, 'MediaApp/profile.html')
+
 @login_required
 def special(request):
     return HttpResponse("You are logged in!")
@@ -74,6 +79,8 @@ def register(request):
                            'registered':registered})
 
 def user_login(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('profile'))
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -81,7 +88,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('index'))
+                return HttpResponseRedirect(reverse('profile', kwargs = {'username': username}))
             else:
                 return HttpResponse("Your account was inactive.")
         else:
