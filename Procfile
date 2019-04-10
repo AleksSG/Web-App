@@ -1,1 +1,1 @@
-web: python3 MML/manage.py runserver $PORT
+web: gunicorn MML.wsgi
