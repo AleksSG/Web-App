@@ -38,3 +38,6 @@ In this case, we just get the songs from a few groups (Melendi, Els amics de les
 Showing the songs of a group (or the movies of a director) is not implemented yet, but they can be seen from the django admin interface
 
 If the user is not logged, the navbar shows the "Register" and "Log in" buttons. If the user is logged, the navbar shows the "Logout" and "MyProfile" buttons.
+
+User: admin
+Password: admin
