@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^profile/(?P<username>\w+)/$',views.profile,name='profile'),
     url(r'^generate/$',views.generate,name='generate'),
+#    url(r'^generate/$',views.generateSongs,name='generateSongs'),
+
 
     url(r'^groups/$', views.GroupListView.as_view(), name='Group'),
     url(r'^directors/$', views.DirectorListView.as_view(), name='Director'),

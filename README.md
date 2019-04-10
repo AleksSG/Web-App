@@ -26,6 +26,15 @@ Moreover, we will use a Free API such as YouTube or SoundCloud to allow the poss
 ### Contributors
 * Albert Planes - [Github: Apseuma](http://github.com/Apseuma)
 * Aleks Genov - [Github: AleksSG](http://github.com/AleksSG)
-* Miquel Ribes
-* Paula Vicente -
+* Miquel Ribes - [Github: mikiribe14](http://github.com/mikiribe14)
+* Paula Vicente - [Github: paulavicente98](http://github.com/paulavicente98)
 * Sergio Vargas - [Github: sergiovargaspuy](http://github.com/sergiovargaspuy)
+
+### Considerations for the 1st delivery
+The user has to press the button "Fill database from iTunes API" for fill the application database with songs, movies, directors and groups. All the content is extracted from the iTunes API.
+
+In this case, we just get the songs from a few groups (Melendi, Els amics de les arts, Ariana Grande, Miley Cyrus, Shawn Mendes, Ed Sheeran i Vicetone). Refering to the movies, we just get the movies from a few directors (Martin Scorsese, Joe Russo, Tim Burton, Quentin Tarantino  and Steven Spielberg)
+
+Showing the songs of a group (or the movies of a director) is not implemented yet, but they can be seen from the django admin interface
+
+If the user is not logged, the navbar shows the "Register" and "Log in" buttons. If the user is logged, the navbar shows the "Logout" and "MyProfile" buttons.
