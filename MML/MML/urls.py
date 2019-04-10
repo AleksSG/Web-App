@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^generate/$',views.generate,name='generate'),
 
     #Are they necessary?
-    url(r'^group/$', views.GroupListView.as_view(), name='Group'),
+    url(r'^groups/$', views.GroupListView.as_view(), name='Group'),
     url(r'^directors/$', views.DirectorListView.as_view(), name='Director'),
     url(r'^movie/$', views.MovieListView.as_view(), name='Movie'),
     url(r'^song/$', views.SongListView.as_view(), name='Song'),

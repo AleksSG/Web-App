@@ -1,0 +1,14 @@
+{% extends "MediaApp/index.html" %}
+{% block dir_block %}
+<ul>
+  {% for group in group_list %}
+  <li>
+    <a href="http://localhost:8000">{{ group.name }}</a>
+    <a>   --- Link: </a>
+    <a href="http://localhost:8000">{{ group.url_info }}</a>
+  </li>
+  {% endfor %}
+
+</ul>
+
+{% endblock %}
