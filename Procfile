@@ -1,1 +1,1 @@
-web: python3 MML/manage.py runserver 8000
+web: python3 MML/manage.py runserver $PORT
