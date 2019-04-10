@@ -1,9 +1,11 @@
 {% extends "MediaApp/index.html" %}
-{% block dir_block %}
+{% block show_generic_list %}
 <ul>
+  <h3>Directors</h3>
   {% for dir in director_list %}
   <li>
-    <a href="http://localhost:8000">{{ dir.name }}</a>
+  	{{ dir.name }}
+    <!-- a href="{{ dir.get_absolute_url }}">{{ dir.name }}</a -->
   </li>
   {% endfor %}
 

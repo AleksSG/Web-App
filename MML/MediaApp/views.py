@@ -140,7 +140,7 @@ class GroupListView(generic.ListView):
 class DirectorListView(generic.ListView):
     model = Director
 
-class MovieListView(generic.DetailView):
+class DirectorDetailView(generic.DetailView):
     model = Movie
 
 class SongListView(generic.DetailView):
