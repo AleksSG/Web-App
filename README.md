@@ -32,6 +32,10 @@ Moreover, we will use a Free API such as YouTube or SoundCloud to allow the poss
 
 ## Considerations for the 1st delivery
 
+### Data model documentation
+The entities are defined in the /MML/MediaApp/models.py file.
+This entities are: Group, Director, Movie, Song and UserProfileInfo
+
 ### General considerations of the application
 
 The user has to press the button "Fill database from iTunes API" for fill the application database with songs, movies, directors and groups. All the content is extracted from the iTunes API.
@@ -44,11 +48,19 @@ If the user is not logged, the navbar shows the "Register" and "Log in" buttons.
 
 ### How to run the application using docker-compose
 
-In /Web-App/MML, do the following command:
+First, we have to migrate the database, using the following command:
+  $sudo python3 manage.py migrate
+
+The, we have to create a superuser, using the following command:
+  $sudo python3 manage.py createsuperuser
+and follow the instructions (give a name, password and email for the administrator user)
+
+Finally, for running the application, the following command:
   $sudo docker-compose up
 
 This will run the application.
 
 For visit the application as a user, write in the browser the url "localhost:8000"
+For starting the admin interface, just press the button "Django admin" at the right of the navbar, or go to the url "localhost:8000/admin"
 
 ### How to run the application on Heroku
