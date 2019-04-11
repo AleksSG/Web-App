@@ -30,7 +30,10 @@ Moreover, we will use a Free API such as YouTube or SoundCloud to allow the poss
 * Paula Vicente - [Github: paulavicente98](http://github.com/paulavicente98)
 * Sergio Vargas - [Github: sergiovargaspuy](http://github.com/sergiovargaspuy)
 
-### Considerations for the 1st delivery
+## Considerations for the 1st delivery
+
+### General considerations of the application
+
 The user has to press the button "Fill database from iTunes API" for fill the application database with songs, movies, directors and groups. All the content is extracted from the iTunes API.
 
 In this case, we just get the songs from a few groups (Melendi, Els amics de les arts, Ariana Grande, Miley Cyrus, Shawn Mendes, Ed Sheeran i Vicetone). Refering to the movies, we just get the movies from a few directors (Martin Scorsese, Joe Russo, Tim Burton, Quentin Tarantino  and Steven Spielberg)
@@ -38,3 +41,14 @@ In this case, we just get the songs from a few groups (Melendi, Els amics de les
 Showing the songs of a group (or the movies of a director) is not implemented yet, but they can be seen from the django admin interface
 
 If the user is not logged, the navbar shows the "Register" and "Log in" buttons. If the user is logged, the navbar shows the "Logout" and "MyProfile" buttons.
+
+### How to run the application using docker-compose
+
+In /Web-App/MML, do the following command:
+  $sudo docker-compose up
+
+This will run the application.
+
+For visit the application as a user, write in the browser the url "localhost:8000"
+
+### How to run the application on Heroku
