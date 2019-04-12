@@ -48,21 +48,30 @@ If the user is not logged, the navbar shows the "Register" and "Log in" buttons.
 
 ### How to run the application using docker-compose
 
-First, we have to be in the Web-App/MML directory.
+The user must have the django and docker-compose installed. If not, the user won't be able to run the docker.
+
+
+First, we must be in the Web-App/MML directory.
 
 Then, we have to migrate the database, using the following command:
+
   $sudo python3 manage.py migrate
 
-Then, we have to create a superuser, using the following command:
+Then, we create a superuser, using the following command:
+
   $sudo python3 manage.py createsuperuser
+
 and follow the instructions (give a name, password and email for the administrator user)
 
+
 Finally, for running the application, the following command:
+
   $sudo docker-compose up
+
 
 This will run the application.
 
-For visit the application as a user, write in the browser the url "localhost:8000"
+For visitting the application as a user, write in the browser the url "localhost:8000"
 For starting the admin interface, just press the button "Django admin" at the right of the navbar, or go to the url "localhost:8000/admin".
 
 ### How to run the application on Heroku
