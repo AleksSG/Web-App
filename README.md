@@ -38,9 +38,9 @@ This entities are: Group, Director, Movie, Song and UserProfileInfo
 
 ### General considerations of the application
 
-The user has to press the button "Fill database from iTunes API" for fill the application database with songs, movies, directors and groups. All the content is extracted from the iTunes API.
+The user has to press the button "Fill database from iTunes API" for filling the application database with songs, movies, directors and groups. All the content is extracted from the iTunes API.
 
-In this case, we just get the songs from a few groups (Melendi, Els amics de les arts, Ariana Grande, Miley Cyrus, Shawn Mendes, Ed Sheeran i Vicetone). Refering to the movies, we just get the movies from a few directors (Martin Scorsese, Joe Russo, Tim Burton, Quentin Tarantino  and Steven Spielberg)
+In this case, we just get the songs from a few groups (Melendi, Els amics de les arts, Ariana Grande, Miley Cyrus, Shawn Mendes, Ed Sheeran and Vicetone). Refering to the movies, we just get the movies from a few directors (Martin Scorsese, Joe Russo, Tim Burton, Quentin Tarantino  and Steven Spielberg)
 
 Showing the songs of a group (or the movies of a director) is not implemented yet, but they can be seen from the django admin interface
 
@@ -71,7 +71,7 @@ Finally, for running the application, the following command:
 
 This will run the application.
 
-For visitting the application as a user, write in the browser the url "localhost:8000"
+For visitting the application as a user, write in the browser the url "localhost:8000".
 For starting the admin interface, just press the button "Django admin" at the right of the navbar, or go to the url "localhost:8000/admin".
 
 ### How to run the application on Heroku
