@@ -6,7 +6,7 @@ import django_heroku
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['fast-reaches-35068.herokuapp.com']
+ALLOWED_HOSTS = ['mymedialist.herokuapp.com']
 
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
