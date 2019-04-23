@@ -103,7 +103,6 @@ def register(request):
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
-
             profile.save()
             registered = True
         else:
