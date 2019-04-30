@@ -4,9 +4,10 @@
   <h3>Directors</h3>
   {% for dir in director_list %}
   <li>
-  	{{ dir.name }}
-    <!-- a href="{{ dir.get_absolute_url }}">{{ dir.name }}</a -->
+    <a href="{{ dir.get_absolute_url }}">{{ dir.name }}</a>
   </li>
+  {% empty %}
+  	<h6>No directors yet</h6>
   {% endfor %}
 
 </ul>

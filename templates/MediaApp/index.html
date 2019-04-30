@@ -12,8 +12,8 @@
 </div>
 <div class="">
   {% block show_generic_list %}
-  <a href="http://localhost:8000/directors"><h1>Directors</h1></a>
-  <a href="http://localhost:8000/groups"><h1>Groups</h1></a>
+  <a href="{% url 'Director' %}"><h1>Directors</h1></a>
+  <a href="{% url 'Group' %}"><h1>Groups</h1></a>
   {% endblock %}
 
 </div>
