@@ -13,6 +13,12 @@
   background-color: #faf2f4;
 }
 
+.fit-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 #navbar {
 	z-index: 10;
 }

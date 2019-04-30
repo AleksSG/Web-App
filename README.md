@@ -46,13 +46,6 @@ Showing the songs of a group (or the movies of a director) is not implemented ye
 
 If the user is not logged, the navbar shows the "Register" and "Log in" buttons. If the user is logged, the navbar shows the "Logout" and "MyProfile" buttons.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-User: admin
-Password: admin
-=======
-=======
->>>>>>> cf994f02b426d593f8aad9b1a7e13629e6b8aca8
 ### How to run the application using docker-compose
 
 The user must have the django and docker-compose installed. If not, the user won't be able to run the docker.
@@ -82,13 +75,7 @@ For visitting the application as a user, write in the browser the url "localhost
 For starting the admin interface, just press the button "Django admin" at the right of the navbar, or go to the url "localhost:8000/admin".
 
 ### How to run the application on Heroku
-Running on (https://mymedialist.herokuapp.com)
-<<<<<<< HEAD
->>>>>>> master
-=======
+Running on https://mymedialist.herokuapp.com
 
-###Superuser
 User: admin
 Password: admin
-
->>>>>>> cf994f02b426d593f8aad9b1a7e13629e6b8aca8

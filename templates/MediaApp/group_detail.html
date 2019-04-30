@@ -1,0 +1,14 @@
+{% extends "MediaApp/index.html" %}
+{% block show_generic_list %}
+<h3>Group: {{ group.name }}</h3>
+
+<div style="margin-left:20px;margin-top:20px">
+    <h5>Songs</h5>
+    <ul>
+    {% for song in group.song_set.all %}
+      <li>{{song.name}}</li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

@@ -1,23 +1,17 @@
-- Register Song C
-- Register Movie C
+- Register Song C (admin)
+- Edit Song C (admin)
+- Delete Song C (admin)
 
-Create Song's Review C
-Edit Song's Review U
-Delete Song's Review D
+Create Song's Review C (user)
+Edit Song's Review U (user)
+Delete Song's Review D (user)
 
-Create Movie's Review C
-Edit Movie's Review U
-Delete Movie's Review D
+- View Song's Data R (anonymous_user)
 
+- View the songs of an artist (group) R (anonymous_user)
 
-- View Song's Data R
-- View Movie's Data R
+- Create user C (anonymous_user)
 
-- Rate Song U
-- Rate Movie U
-
-- View the songs/movies of an artist (singer or director) R
-
-- Create user C
-
-Create toplist R (en base als ratings)
+#Maybe in the future
+See toplist (depending on ratings) R (anonymous_user)
+Create playlist C (user)

@@ -1,13 +1,22 @@
 {% extends "MediaApp/index.html" %}
 {% block show_generic_list %}
-<ul>
+<h3>Groups</h3>
+
+  <div class="list-group">
   {% for group in group_list %}
-  <li>
-  	{{ group.name }}    <a href="{{ group.url_info }}">{{ group.url_info }}</a>
-    <!-- a href="http://localhost:8000">{{ group.name }}</a -->
-  </li>
+  	<div class="">
+      <div class="">
+        <a class="list-group-item list-group-item-action" href="{{ group.get_absolute_url }}">{{ group.name }}</a>
+      </div>
+      <!--div class="col-md-5">
+        <a class="list-group-item list-group-item-action" href="{{ group.url_info }}">
+
+        </a>
+      </div-->
+    </div>
+  {% empty %}
+    	<h6>No groups yet</h6>
   {% endfor %}
 
-</ul>
 
 {% endblock %}

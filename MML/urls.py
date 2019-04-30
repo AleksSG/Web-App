@@ -33,7 +33,8 @@ urlpatterns = [
 
 
     url(r'^groups/$', views.GroupListView.as_view(), name='Group'),
-    url(r'^directors/$', views.DirectorListView.as_view(), name='Director'),
-    url(r'^directors/(?P<pk>[0-9]+)$', views.DirectorDetailView.as_view(), name='Movies_Director'),
-    url(r'^song/$', views.SongListView.as_view(), name='Song'),
+    url(r'^groups/(?P<pk>[0-9]+)/$', views.GroupDetailView.as_view(), name='Songs_Group'),
+    #url(r'^directors/$', views.DirectorListView.as_view(), name='Director'),
+    #url(r'^directors/(?P<pk>[0-9]+)$', views.DirectorDetailView.as_view(), name='Movies_Director'),
+
 ]
