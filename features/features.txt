@@ -1,13 +1,17 @@
 - Register Song C
 - Register Movie C
 
-Create Playlist C
-Edit Playlist U
-Delete Playlist D
-Share Playlist /*(mostrarho a la nostra pagina de perfil)*/
+Create Song's Review C
+Edit Song's Review U
+Delete Song's Review D
+
+Create Movie's Review C
+Edit Movie's Review U
+Delete Movie's Review D
+
 
 - View Song's Data R
-- View Movies's Data R
+- View Movie's Data R
 
 - Rate Song U
 - Rate Movie U
@@ -15,7 +19,5 @@ Share Playlist /*(mostrarho a la nostra pagina de perfil)*/
 - View the songs/movies of an artist (singer or director) R
 
 - Create user C
-Follow friends C/U
-Unfollow friends D
 
 Create toplist R (en base als ratings)

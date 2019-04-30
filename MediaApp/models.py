@@ -35,6 +35,14 @@ class Movie(models.Model):
         movie = cls(name=n, director=d, releaseDate=rD, genre=g, description=descr, url_info=url)
         return movie
 
+class MovieComment(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    user = UserProfileInfo(Movie, on_delete=models.CASCADE)
+    content = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.name
+
 class Song(models.Model):
     name = models.CharField(max_length=100)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
@@ -49,6 +57,14 @@ class Song(models.Model):
     def create(cls,n,g,a,rD,descr,url):
         song = cls(name=n, group=g, album=a, releaseDate=rD, genre=g, url_info=url)
         return song
+
+class SongComment(models.Model):
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    user = UserProfileInfo(Movie, on_delete=models.CASCADE)
+    content = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.name
 
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
