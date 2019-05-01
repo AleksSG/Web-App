@@ -2,19 +2,18 @@
 {% block body_block %}
 
 <div class="">
-  <h3>This is the home page</h3>
-  <h3>Here a list and a filter will be shown</h3>
-  <h3>And maybe other features in the future like news, updates, etc</h3>
-  <h4>You can play with the above buttons:</h4>
-  <h4>Register, login, logout, go to your profile...</h4>
-  <h4>Or you can use the list below to see our "Database"</h4>
+  <h6>This is the home page</h6>
+  <h6>Here a list and a filter will be shown</h6>
+  <h6>And maybe other features in the future like news, updates, etc</h6>
+  <h6>You can play with the above buttons:</h6>
+  <h6>Register, login, logout, go to your profile...</h6>
+  <h6>Or you can use the list below to see our "Database"</h6>
   <div class="dropdown-divider"></div>
 </div>
 <div class="">
   {% block show_generic_list %}
-  <a href="{% url 'Group' %}"><h1>Groups</h1></a>
+  <a href="{% url 'Group' %}"><h3>Groups</h3></a>
   {% endblock %}
-
 </div>
 
 {% endblock %}

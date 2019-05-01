@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^profile/(?P<username>\w+)/$',views.profile,name='profile'),
     url(r'^generate/$',views.generate,name='generate'),
 #    url(r'^generate/$',views.generateSongs,name='generateSongs'),
+    url(r'^manage_data/$', views.manage, name= 'manage_data'),
 
 
     url(r'^groups/$', views.GroupListView.as_view(), name='Group'),

@@ -1,22 +1,43 @@
 from django.shortcuts import render
 from MediaApp.forms import UserForm, UserProfileInfoForm
 from django.contrib.auth import authenticate, login, logout
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.views import generic
 from .models import Group, Song
+from django.utils.decorators import method_decorator
+from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView, UpdateView
 
 import requests
 import json
 
 # Create your views here.
+
+# Security Mixins
+class LoginRequiredMixin(object):
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+
+class CheckIsOwnerMixin(object):
+    def get_object(self, *args, **kwargs):
+        obj = super(CheckIsOwnerMixin, self).get_object(*args, **kwargs)
+        if not obj.user == self.request.user:
+            raise PermissionDenied
+        return obj
+
+class LoginRequiredCheckIsOwnerUpdateView(LoginRequiredMixin, CheckIsOwnerMixin, UpdateView):
+    template_name = 'templates/login.html'
+
 def index(request):
     return render(request,'MediaApp/index.html')
 
 def profile(request, username):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user_login'))
+
     return render(request, 'MediaApp/profile.html')
 
 @login_required
@@ -95,6 +116,12 @@ def generate(request):
     #generateMovies(request)
     return render(request,'MediaApp/generate.html')
 
+def manage(request):
+    if request.user.is_superuser:
+        return render(request, 'MediaApp/manage_data.html')
+    raise PermissionDenied
+
+
 def register(request):
     registered = False
     if request.method == 'POST':
@@ -139,8 +166,8 @@ def user_login(request):
     else:
         return render(request, 'MediaApp/login.html', {})
 
-class GroupListView(generic.ListView):
+class GroupListView(ListView):
     model = Group
 
-class GroupDetailView(generic.DetailView):
+class GroupDetailView(DetailView):
     model = Group
