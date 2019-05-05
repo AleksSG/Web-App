@@ -7,6 +7,7 @@
   {% for song in group.song_set.all %}
     <div class="">
       <a class="list-group-item list-group-item-action" href="{{ song.url_info }}">{{ song.name }}</a>
+      <!--<a class="list-group-item list-group-item-action" href="{% url 'song_info' song.name  %}">{{ song.name }}</a>PETA PERO POT SER QUE NO SIGUI CULPA DE AIXO></q>-->
     </div>
   {% endfor %}
 </div>

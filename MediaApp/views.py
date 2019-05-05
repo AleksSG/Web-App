@@ -166,6 +166,9 @@ def user_login(request):
     else:
         return render(request, 'MediaApp/login.html', {})
 
+#def song_info(request):
+#    return render(request, 'MediaApp/song_info.html', kwargs = {'song_id': id}) PETA I NO SÉ PERQUÉ
+
 class GroupListView(ListView):
     model = Group
 
