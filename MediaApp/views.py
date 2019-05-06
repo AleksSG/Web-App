@@ -166,11 +166,22 @@ def user_login(request):
     else:
         return render(request, 'MediaApp/login.html', {})
 
-#def song_info(request):
-#    return render(request, 'MediaApp/song_info.html', kwargs = {'song_id': id}) PETA I NO SÉ PERQUÉ
+def song_info(request, pk):
+    song = Song.objects.filter(pk = pk).first()
+    #query_set = SongComment.objects.filter(song = song)#.all?
+    return render(request, 'MediaApp/song_info.html', {'song' : song,})
 
 class GroupListView(ListView):
     model = Group
 
 class GroupDetailView(DetailView):
     model = Group
+
+def get_str_for_url(strg):
+    for c in strg:
+        if c >= 'A' and c <= 'Z' or c >= 'a' and c <= 'z' or c >= '0' and c <= '9':
+            pass
+        else:
+            c = '_'
+    return strg
+
