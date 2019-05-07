@@ -5,7 +5,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Group, Song
+from .models import Group, Song, User, UserProfileInfo
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -14,22 +14,11 @@ import requests
 import json
 
 # Create your views here.
-
-# Security Mixins
-class LoginRequiredMixin(object):
-    @method_decorator(login_required())
-    def dispatch(self, *args, **kwargs):
-        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
-
-class CheckIsOwnerMixin(object):
-    def get_object(self, *args, **kwargs):
-        obj = super(CheckIsOwnerMixin, self).get_object(*args, **kwargs)
-        if not obj.user == self.request.user:
-            raise PermissionDenied
-        return obj
-
-class LoginRequiredCheckIsOwnerUpdateView(LoginRequiredMixin, CheckIsOwnerMixin, UpdateView):
-    template_name = 'templates/login.html'
+# Check if user is owner (security)
+def userIsOwner(request, user_db):
+    if not user_db == request.user:
+        raise PermissionDenied
+    return True
 
 def index(request):
     return render(request,'MediaApp/index.html')
@@ -37,8 +26,12 @@ def index(request):
 def profile(request, username):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user_login'))
-
-    return render(request, 'MediaApp/profile.html')
+    user_db = User.objects.filter(username = username).first()
+    if userIsOwner(request, user_db):
+        if not request.user.is_superuser:
+            user_db = UserProfileInfo.objects.filter(user = user_db).first()
+        print(type(user_db))
+        return render(request, 'MediaApp/profile.html', {'user_db' : user_db})
 
 @login_required
 def special(request):
@@ -156,7 +149,9 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('profile', kwargs = {'username': username}))
+                user_db = User.objects.filter(username = username).first()
+                print(user_db)
+                return HttpResponseRedirect(reverse('profile', kwargs = {'username': user_db.username}))
             else:
                 return HttpResponse("Your account was inactive.")
         else:
@@ -176,12 +171,4 @@ class GroupListView(ListView):
 
 class GroupDetailView(DetailView):
     model = Group
-
-def get_str_for_url(strg):
-    for c in strg:
-        if c >= 'A' and c <= 'Z' or c >= 'a' and c <= 'z' or c >= '0' and c <= '9':
-            pass
-        else:
-            c = '_'
-    return strg
 

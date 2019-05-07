@@ -11,6 +11,16 @@
     {% endif %}
   </div>
   <div>
+    {% if not user.is_superuser %}
+    <h2>Username: {{ user_db.user.username }}</h2>
+    <h2>Email: {{ user_db.user.email }} </h2>
+    <h2>BirthDate: {{ user_db.bday }}</h2>
+    {% else %}
+    <h2>Username: {{ user_db.username }}</h2>
+    <h2>Email: {{ user_db.email }} </h2>
+    {% endif %}
+  </div>
+  <div>
     <h3>Text de prova pel Scroll down</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra adipiscing at in tellus integer feugiat. Eget mauris pharetra et ultrices neque. Malesuada proin libero nunc consequat interdum varius. At consectetur lorem donec massa sapien faucibus et molestie. Gravida rutrum quisque non tellus orci ac. Bibendum enim facilisis gravida neque convallis a cras. Fringilla urna porttitor rhoncus dolor purus non enim. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Ultrices gravida dictum fusce ut placerat orci nulla. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat.
 
