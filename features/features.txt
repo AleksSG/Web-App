@@ -1,16 +1,16 @@
-- Register Song C (admin)
-- Edit Song C (admin)
-- Delete Song C (admin)
+- Register Song C (admin) OK
+- Edit Song C (admin) OK
+- Delete Song C (admin) OK
 
-Create Song's Review C (user)
-Edit Song's Review U (user)
-Delete Song's Review D (user)
+Create Song's Review C (user) OK
+Edit Song's Review U (user) OK
+Delete Song's Review D (user) OK
 
-- View Song's Data R (anonymous_user)
+- View Song's Data R (anonymous_user) OK/2
 
-- View the songs of an artist (group) R (anonymous_user)
+- List Songs (of a group) R (anonymous_user) OK
 
-- Create user C (anonymous_user)
+- Create user C (anonymous_user) OK
 
 #Maybe in the future
 See toplist (depending on ratings) R (anonymous_user)
