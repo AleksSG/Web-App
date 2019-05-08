@@ -6,7 +6,8 @@
   <h5>Songs</h5>
   {% for song in group.song_set.all %}
     <div class="">
-      <a class="list-group-item list-group-item-action" href="{{ song.url_info }}">{{ song.name }}</a>
+      <!--a class="list-group-item list-group-item-action" href="{{ song.url_info }}">{{ song.name }}</a-->
+      <a class="list-group-item list-group-item-action" href="{% url 'song_info' song.pk %}">{{ song.name }}</a>
     </div>
   {% endfor %}
 </div>
