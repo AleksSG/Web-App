@@ -12,6 +12,7 @@
   </div>
   <div>
     {% if not user.is_superuser %}
+    <a href="{% url 'delete_user' user_db.user %}" class="btn btn-outline-danger btn-sm" role="button" aria-pressed="true">Delete User</a>
     <h2>Username: {{ user_db.user.username }}</h2>
     <h2>Email: {{ user_db.user.email }} </h2>
     <h2>BirthDate: {{ user_db.bday }}</h2>

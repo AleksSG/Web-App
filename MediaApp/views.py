@@ -30,8 +30,15 @@ def profile(request, username):
     if userIsOwner(request, user_db):
         if not request.user.is_superuser:
             user_db = UserProfileInfo.objects.filter(user = user_db).first()
-        print(type(user_db))
         return render(request, 'MediaApp/profile.html', {'user_db' : user_db})
+
+def delete_user(request, user):
+    user = User.objects.filter(username = user).first()
+    if userIsOwner(request, user):
+        logout(request)
+        User.objects.filter(username = user).delete()
+        user.delete()
+        return HttpResponseRedirect(reverse('index'))
 
 @login_required
 def special(request):
@@ -137,7 +144,7 @@ def register(request):
     return render(request,'MediaApp/registration.html',
                           {'user_form':user_form,
                            'profile_form':profile_form,
-                           'registered':registered})
+                           'registered':registered,})
 
 def user_login(request):
     if request.user.is_authenticated:
@@ -171,4 +178,3 @@ class GroupListView(ListView):
 
 class GroupDetailView(DetailView):
     model = Group
-
