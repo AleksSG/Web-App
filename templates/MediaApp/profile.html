@@ -21,8 +21,19 @@
     <h2>Email: {{ user_db.email }} </h2>
     {% endif %}
   </div>
+  <div class="">
+    <h4>Comments done by user</h4>
+    {% for comment in comments %}
+        <div class="list-group-item list-group-item-action">
+          {{ comment }}
+          <p class="text-muted font-italic">{{ comment.content }}</p>
+        </div>
+    {% empty %}
+        <h6>No comments yet</h6>
+    {% endfor %}
+  </div>
   <div>
-    <h3>Text de prova pel Scroll down</h3>
+    <h4>Text de prova pel Scroll down</h4>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra adipiscing at in tellus integer feugiat. Eget mauris pharetra et ultrices neque. Malesuada proin libero nunc consequat interdum varius. At consectetur lorem donec massa sapien faucibus et molestie. Gravida rutrum quisque non tellus orci ac. Bibendum enim facilisis gravida neque convallis a cras. Fringilla urna porttitor rhoncus dolor purus non enim. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Ultrices gravida dictum fusce ut placerat orci nulla. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat.
 
 Facilisis gravida neque convallis a cras semper auctor neque vitae. Arcu ac tortor dignissim convallis. Leo urna molestie at elementum eu facilisis. Nunc faucibus a pellentesque sit amet porttitor eget dolor. Tempus egestas sed sed risus pretium. Nibh cras pulvinar mattis nunc sed blandit libero volutpat. Volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Risus nec feugiat in fermentum posuere urna nec. Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Tristique sollicitudin nibh sit amet. Arcu non sodales neque sodales ut etiam sit amet. Tellus integer feugiat scelerisque varius morbi. Ut venenatis tellus in metus. Urna porttitor rhoncus dolor purus non enim praesent elementum. In nibh mauris cursus mattis molestie a iaculis. Amet purus gravida quis blandit turpis cursus in.
@@ -31,16 +42,6 @@ At auctor urna nunc id cursus metus aliquam eleifend mi. Nisi vitae suscipit tel
 
 Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices eros. Tortor posuere ac ut consequat semper viverra. Odio pellentesque diam volutpat commodo sed. Quam quisque id diam vel quam elementum. Auctor eu augue ut lectus arcu. Dui accumsan sit amet nulla facilisi morbi tempus. Pretium quam vulputate dignissim suspendisse in est ante. Purus non enim praesent elementum facilisis leo vel. Semper eget duis at tellus at urna condimentum. Potenti nullam ac tortor vitae purus faucibus ornare suspendisse. Et egestas quis ipsum suspendisse. Pretium quam vulputate dignissim suspendisse in est ante. Malesuada fames ac turpis egestas integer.
 
-At varius vel pharetra vel turpis nunc eget lorem dolor. Arcu risus quis varius quam. Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Convallis posuere morbi leo urna molestie at. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin aliquam. Mauris a diam maecenas sed enim ut sem. Magna sit amet purus gravida quis blandit turpis cursus. Nisl purus in mollis nunc sed id semper risus. Amet tellus cras adipiscing enim. Metus aliquam eleifend mi in. Quis vel eros donec ac odio tempor. Mollis aliquam ut porttitor leo a diam sollicitudin tempor. Bibendum arcu vitae elementum curabitur vitae. Nibh tortor id aliquet lectus proin nibh nisl. Tempor nec feugiat nisl pretium fusce id velit. Vitae auctor eu augue ut. Arcu dui vivamus arcu felis bibendum ut tristique.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Viverra adipiscing at in tellus integer feugiat. Eget mauris pharetra et ultrices neque. Malesuada proin libero nunc consequat interdum varius. At consectetur lorem donec massa sapien faucibus et molestie. Gravida rutrum quisque non tellus orci ac. Bibendum enim facilisis gravida neque convallis a cras. Fringilla urna porttitor rhoncus dolor purus non enim. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Ultrices gravida dictum fusce ut placerat orci nulla. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat.
-
-Facilisis gravida neque convallis a cras semper auctor neque vitae. Arcu ac tortor dignissim convallis. Leo urna molestie at elementum eu facilisis. Nunc faucibus a pellentesque sit amet porttitor eget dolor. Tempus egestas sed sed risus pretium. Nibh cras pulvinar mattis nunc sed blandit libero volutpat. Volutpat consequat mauris nunc congue nisi vitae suscipit tellus. Risus nec feugiat in fermentum posuere urna nec. Condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Tristique sollicitudin nibh sit amet. Arcu non sodales neque sodales ut etiam sit amet. Tellus integer feugiat scelerisque varius morbi. Ut venenatis tellus in metus. Urna porttitor rhoncus dolor purus non enim praesent elementum. In nibh mauris cursus mattis molestie a iaculis. Amet purus gravida quis blandit turpis cursus in.
-
-At auctor urna nunc id cursus metus aliquam eleifend mi. Nisi vitae suscipit tellus mauris a diam maecenas sed enim. Lacus luctus accumsan tortor posuere ac ut. Convallis tellus id interdum velit laoreet. Auctor urna nunc id cursus metus. Nulla facilisi etiam dignissim diam quis enim. Faucibus ornare suspendisse sed nisi lacus sed viverra. Leo a diam sollicitudin tempor id eu. Justo laoreet sit amet cursus. Varius duis at consectetur lorem donec. Vitae ultricies leo integer malesuada nunc vel risus commodo. At varius vel pharetra vel turpis nunc eget lorem dolor. Fermentum dui faucibus in ornare quam viverra orci sagittis. Diam vulputate ut pharetra sit amet aliquam. Id eu nisl nunc mi ipsum faucibus vitae. In metus vulputate eu scelerisque felis imperdiet proin. Blandit turpis cursus in hac habitasse platea. Vel quam elementum pulvinar etiam non quam lacus suspendisse. Tincidunt arcu non sodales neque sodales ut etiam sit amet. Sed libero enim sed faucibus turpis in eu.
-
-Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices eros. Tortor posuere ac ut consequat semper viverra. Odio pellentesque diam volutpat commodo sed. Quam quisque id diam vel quam elementum. Auctor eu augue ut lectus arcu. Dui accumsan sit amet nulla facilisi morbi tempus. Pretium quam vulputate dignissim suspendisse in est ante. Purus non enim praesent elementum facilisis leo vel. Semper eget duis at tellus at urna condimentum. Potenti nullam ac tortor vitae purus faucibus ornare suspendisse. Et egestas quis ipsum suspendisse. Pretium quam vulputate dignissim suspendisse in est ante. Malesuada fames ac turpis egestas integer.
-
-At varius vel pharetra vel turpis nunc eget lorem dolor. Arcu risus quis varius quam. Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Convallis posuere morbi leo urna molestie at. Cursus metus aliquam eleifend mi in nulla posuere sollicitudin aliquam. Mauris a diam maecenas sed enim ut sem. Magna sit amet purus gravida quis blandit turpis cursus. Nisl purus in mollis nunc sed id semper risus. Amet tellus cras adipiscing enim. Metus aliquam eleifend mi in. Quis vel eros donec ac odio tempor. Mollis aliquam ut porttitor leo a diam sollicitudin tempor. Bibendum arcu vitae elementum curabitur vitae. Nibh tortor id aliquet lectus proin nibh nisl. Tempor nec feugiat nisl pretium fusce id velit. Vitae auctor eu augue ut. Arcu dui vivamus arcu felis bibendum ut tristique.</p>
   </div>
 </div>
 {% endblock %}

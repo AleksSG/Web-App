@@ -5,7 +5,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Group, Song, User, UserProfileInfo
+from .models import Group, Song, User, UserProfileInfo, SongComment
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -30,7 +30,11 @@ def profile(request, username):
     if userIsOwner(request, user_db):
         if not request.user.is_superuser:
             user_db = UserProfileInfo.objects.filter(user = user_db).first()
-        return render(request, 'MediaApp/profile.html', {'user_db' : user_db})
+            comments_by_user = SongComment.objects.filter(user = user_db)[::1]
+            comments_by_user.sort(key=lambda x: x.song.id, reverse=True)
+            return render(request, 'MediaApp/profile.html', {'user_db' : user_db,
+                                                             'comments' : comments_by_user})
+        return render(request, 'MediaApp/profile.html', {'user_db' : user_db,})
 
 def delete_user(request, user):
     user = User.objects.filter(username = user).first()
