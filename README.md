@@ -8,7 +8,7 @@ We are asked to do a project from _Universitat de Lleida_ subject 'Project Web'.
 
 ### Application idea
 
-We will make a kind of media database which includes music, movies, etc. using the [iTunes API](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/) without affiliating where the user can search content in our D.B. and it will be shown all the information about the result.
+We will make a kind of media database which includes music, movies, etc. using the [iTunes API](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/) without affiliating where the user can search content in our D.B. and it will be shown all the information about the result. It is limited to 20 querys per minute.
 The user can sing up and log in to a personal space with its information and some additional functionalities such as:
 
 * Creating playlists
@@ -50,24 +50,22 @@ If the user is not logged, the navbar shows the "Register" and "Log in" buttons.
 
 The user must have the django and docker-compose installed. If not, the user won't be able to run the docker.
 
-
 First, we must be in the Web-App/MML directory.
 
 Then, we have to migrate the database, using the following command:
 
-  $sudo python3 manage.py migrate
+  `$sudo python3 manage.py migrate`
 
 Then, we create a superuser, using the following command:
 
-  $sudo python3 manage.py createsuperuser
+  `$sudo python3 manage.py createsuperuser`
 
 and follow the instructions (give a name, password and email for the administrator user)
 
 
 Finally, for running the application, the following command:
 
-  $sudo docker-compose up
-
+  `$sudo docker-compose up`
 
 This will run the application.
 
@@ -75,7 +73,61 @@ For visitting the application as a user, write in the browser the url "localhost
 For starting the admin interface, just press the button "Django admin" at the right of the navbar, or go to the url "localhost:8000/admin".
 
 ### How to run the application on Heroku
-Running on https://mymedialist.herokuapp.com
+Currently running on https://mymedialist.herokuapp.com
 
+###### Superuser details
+User: admin
+Password: admin
+
+## Considerations for the 2nd delivery
+
+### Data model documentation
+As the main idea is the same for the previous models, we reduced to half them.
+Our actual entities are: Group, Song, UserProfileInfo and SongComment
+
+### General considerations of the application
+
+The above functionalities cannot be implemented due to lack of time for the delivery deadline and some of them are too complex and unnecessary (not required).
+We reduced the functionalities to the following table, as well as with the corresponding permissions for the CRUD (Create, Read, Update, Delete):
+
+Entities | Create | Read | Update | Delete | Expanation
+UserProfileInfo | anonymous_user | superuser (owner), user (owner) | - | user (owner) | Register and access to your profile
+Group | superuser | everybody | superuser | superuser | The artist of a song. Only admin can modify data
+Song | superuser | everybody | superuser | superuser | The songs. Only admin can modify data
+SongComment | user | everybody | user (own) | user (own) | Comment the songs. Admin cannot comment
+
+###### Security
+It is checked before an action happens (e.g.: Delete SongComment), if the actual user have the permissions shown above to perform that. In the case of modifying data, each user with admin status (superuser) can execute the operation.
+
+Another important thing, in some URL only superuser can enter (e.g.: manage data URL). It is checked if the user has superuser status.
+In other cases, it is checked if a user can access to an URL not owned such as the profile URL of another user.
+
+In any case there are not enough permissions to perform an action, a 403 Forbidden code status is shown.
+
+###### Manage data section (superuser)
+As said before, only superusers can access to it.
+
+There are 4 buttons with some JQuery actions where each button displays a form to complete, in order to the admin's desire.
+
+All fields are required by Django's form default and it IS NOT considered to change a field to "non required" if another button is active.
+Nevertheless, it is not a logical problem because the "submit" button only applies for the actual form.
+
+- Adding content. There are two ways to perform that.
+    1. Manually. User has to insert all the required fields correctly in order to save a new instance of the model.
+    2. Autocomplete. When writing the "name" field, the program will execute a JQuery & AJAX script which will query to the iTunes API. After that, when choosing one of the resoults, it will autocomplete all the remaining fields. Important: it would make only 20 querys per minute!
+- Modifying content. A future improvement, it is possible to insert a script which filters the "Song" choice form where, a Group is selected, it would only appear Songs with that Group. However, we did not implement that due to the difficulty (communication between Django and JQuery script). In the edit page, the model with its current information is shown. User can modify and save changes or delete this model. Attention:
+    1. there are NO confirmation messages!
+    2. it is set ON DELETE CASCADE!
+
+###### Comment Song (registered user)
+Work in progress...
+
+###### Behave (test features)
+Work in progress...
+
+###### Deployment in heroku
+We will deploy on https://mymedialist.herokuapp.com (not yet)
+
+**Superuser details**
 User: admin
 Password: admin
