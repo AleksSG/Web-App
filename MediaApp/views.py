@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm
+from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
@@ -122,10 +122,14 @@ def generate(request):
     return render(request,'MediaApp/generate.html')
 
 def manage(request):
+    keywords_gr = {'qs_group': Group.objects.all(), }
+    keywords_song = { 'qs_song': Song.objects.all()}
     if request.user.is_superuser:
         if request.method == 'POST':
             group_form = GroupForm(data=request.POST)
             song_form = SongForm(data=request.POST)
+            ed_group_form = EditGroupForm(data=request.POST, **keywords_gr)
+            ed_song_form = EditSongForm(data=request.POST, **keywords_song)
             if group_form.is_valid():
                 group_name = group_form.cleaned_data.get('group_name')
                 group_url = group_form.cleaned_data.get('group_url')
@@ -134,6 +138,10 @@ def manage(request):
                     group_model = Group(name = group_name, url_info = group_url)
                     print(group_model)
                     group_model.save()
+            elif ed_group_form.is_valid():
+                group = ed_group_form.cleaned_data.get('ed_group')
+                return HttpResponseRedirect(reverse('edit_group', kwargs={'pk':group.pk}))
+
             elif song_form.is_valid():
                 song_name = song_form.cleaned_data.get('song_name')
                 song_group = song_form.cleaned_data.get('group')
@@ -148,6 +156,9 @@ def manage(request):
                 if not Song.objects.filter(name = song_name).filter(group = group_db).exists():
                     song_model = Song(name=song_name, group=group_db, album=song_album, release_date=release_date, genre=genre, url_info=song_url)
                     song_model.save()
+            elif ed_song_form.is_valid():
+                song = ed_song_form.cleaned_data.get('ed_song')
+                return HttpResponseRedirect(reverse('edit_song', kwargs={'pk':song.pk}))
 
             else:
                 print(group_form.errors)
@@ -155,16 +166,62 @@ def manage(request):
         else:
             group_form = GroupForm()
             song_form = SongForm()
-
+            ed_group_form = EditGroupForm(**keywords_gr)
+            ed_song_form = EditSongForm(**keywords_song)
         return render(request, 'MediaApp/manage_data.html', {'group_form': group_form,
-                                                         'song_form':  song_form})
+                                                         'song_form':  song_form,
+                                                         'ed_group_form': ed_group_form,
+                                                         'ed_song_form': ed_song_form})
     raise PermissionDenied
 
-def add_group(request):
-    print("pp")
-    manage(request)
-    # raise PermissionDenied
+def edit_group(request, pk):
+    if request.user.is_superuser:
+        group_model = Group.objects.filter(id=pk).first()
+        initial_values={'name': group_model.name, 'url_info': group_model.url_info}
+        if request.method == 'POST':
+            edit_group_fields_form = EditGroupFields(data=request.POST, initial=initial_values)
+            if edit_group_fields_form.is_valid():
+                group_model.name = edit_group_fields_form.cleaned_data['name']
+                group_model.url_info = edit_group_fields_form.cleaned_data['url_info']
+                group_model.save()
+        else:
+            edit_group_fields_form = EditGroupFields(initial=initial_values)
+        return render(request, 'MediaApp/edit_group.html', {'group': group_model,
+                                                            'form': edit_group_fields_form})
+    raise PermissionDenied
 
+def delete_group(request, pk):
+    if request.user.is_superuser:
+        Group.objects.filter(id = pk).delete()
+        return HttpResponseRedirect(reverse('manage_data'))
+    raise PermissionDenied
+
+def edit_song(request, pk):
+    if request.user.is_superuser:
+        song_model = Song.objects.filter(id=pk).first()
+        initial_values={'name': song_model.name, 'group': song_model.group, 'album': song_model.album, 'release_date': song_model.release_date, 'genre': song_model.genre, 'url_info': song_model.url_info}
+        if request.method == 'POST':
+            edit_song_fields_form = EditSongFields(data=request.POST, initial=initial_values)
+            if edit_song_fields_form.is_valid():
+                song_model.name = edit_song_fields_form.cleaned_data['name']
+                song_model.group = edit_song_fields_form.cleaned_data['group']
+                song_model.album = edit_song_fields_form.cleaned_data['album']
+                song_model.release_date = edit_song_fields_form.cleaned_data['release_date']
+                song_model.genre = edit_song_fields_form.cleaned_data['genre']
+                song_model.url_info = edit_song_fields_form.cleaned_data['url_info']
+                song_model.save()
+        else:
+            edit_song_fields_form = EditSongFields(initial=initial_values)
+        return render(request, 'MediaApp/edit_song.html', {'song': song_model,
+                                                           'form': edit_song_fields_form})
+
+    raise PermissionDenied
+
+def delete_song(request, pk):
+    if request.user.is_superuser:
+        Song.objects.filter(id = pk).delete()
+        return HttpResponseRedirect(reverse('manage_data'))
+    raise PermissionDenied
 
 def register(request):
     registered = False

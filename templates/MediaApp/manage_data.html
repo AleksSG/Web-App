@@ -12,6 +12,14 @@
         </form>
       </div>
 
+    <input type="radio" name="model" value="edgroup"> Edit Group <br>
+      <div id="edit_group" style="display:none">
+        <form method="post">
+          {% csrf_token %}
+          {{ ed_group_form.as_p }}
+          <input type="submit" class="btn btn-primary btn_submit" value="Edit">
+        </form>
+      </div>
     <input type="radio" name="model" value="song"> Add Song <br>
       <div id="add_song">
         <form method="post">
@@ -20,6 +28,21 @@
           <input type="submit" class="btn btn-primary btn_submit" value="Save">
         </form>
       </div>
+    <input type="radio" name="model" value="edsong"> Edit Song <br>
+      <div id="edit_song" style="display:none">
+        <form method="post">
+          {% csrf_token %}
+          {{ ed_song_form.as_p }}
+          <input type="submit" class="btn btn-primary btn_submit" value="Edit">
+        </form>
+      </div>
   </div>
 </div>
+<!-- <input type="radio" name="model" value="egroup"> Edit Group <br>
+<div id="edit_group">
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-primary btn_submit" value="Save">
+  </form>
+</div> -->
 {% endblock %}
