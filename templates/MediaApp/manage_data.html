@@ -4,26 +4,21 @@
   <div id="add_content">
 
     <input type="radio" name="model" value="group"> Add Group <br>
-      <div id="add_group"
-        <div class="form-group">
-          <form action="/add_group/" class="" method="POST">
-            {% csrf_token %}
-            <label for="inputGroupName">Group name</label>
-            <input type="text" class="form-control" id="inputGroupName" placeholder="Group name" required>
-            <small class="form-text text-muted">Required</small>
-            <label for="exampleInputPassword1">Group URL</label>
-            <input type="text" class="form-control" id="inputGroupUrl" placeholder="Group URL">
-            <input type="submit" class="btn btn-primary btn_submit" value="Save">
-          </form>
-        </div>
-
+      <div id="add_group">
+        <form method="post">
+          {% csrf_token %}
+          {{ group_form.as_p }}
+          <input type="submit" class="btn btn-primary btn_submit" value="Save">
+        </form>
       </div>
+
     <input type="radio" name="model" value="song"> Add Song <br>
       <div id="add_song">
-        <h4>Ironman muere</h4>
-        <h4>Thor esta gordo</h4>
-        <h4>Viuda negra</h4>
-        <h4>Muere media peli</h4>
+        <form method="post">
+          {% csrf_token %}
+          {{ song_form.as_p }}
+          <input type="submit" class="btn btn-primary btn_submit" value="Save">
+        </form>
       </div>
   </div>
 </div>

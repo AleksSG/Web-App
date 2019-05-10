@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from MediaApp.forms import UserForm, UserProfileInfoForm, Groupform
+from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
@@ -9,6 +9,7 @@ from .models import Group, Song, User, UserProfileInfo, SongComment
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+from django.contrib import messages
 
 import requests
 import json
@@ -122,22 +123,46 @@ def generate(request):
 
 def manage(request):
     if request.user.is_superuser:
-        return render(request, 'MediaApp/manage_data.html')
+        if request.method == 'POST':
+            group_form = GroupForm(data=request.POST)
+            song_form = SongForm(data=request.POST)
+            if group_form.is_valid():
+                group_name = group_form.cleaned_data.get('group_name')
+                group_url = group_form.cleaned_data.get('group_url')
+
+                if not Group.objects.filter(name = group_name).filter(url_info = group_url).exists():
+                    group_model = Group(name = group_name, url_info = group_url)
+                    print(group_model)
+                    group_model.save()
+            elif song_form.is_valid():
+                song_name = song_form.cleaned_data.get('song_name')
+                song_group = song_form.cleaned_data.get('group')
+                song_album = song_form.cleaned_data.get('album')
+                release_date = song_form.cleaned_data.get('releaseDate')
+                genre = song_form.cleaned_data.get('genre')
+                song_url = song_form.cleaned_data.get('song_url')
+                group_db = Group.objects.filter(name = song_group).first()
+                if not group_db:
+                    group_db = Group(name = song_group)
+                    group_db.save()
+                if not Song.objects.filter(name = song_name).filter(group = group_db).exists():
+                    song_model = Song(name=song_name, group=group_db, album=song_album, release_date=release_date, genre=genre, url_info=song_url)
+                    song_model.save()
+
+            else:
+                print(group_form.errors)
+                print(song_form.errors)
+        else:
+            group_form = GroupForm()
+            song_form = SongForm()
+
+        return render(request, 'MediaApp/manage_data.html', {'group_form': group_form,
+                                                         'song_form':  song_form})
     raise PermissionDenied
 
 def add_group(request):
-    print(request.method)
-    form = None
-    if request.method == 'POST':
-        form = Groupform(data=request.POST)
-        
-        if form.is_valid():
-            group = form.save()
-            print(group)
-        else:
-            print(form.errors)
-
-    return render(request, 'MediaApp/manage_data.html', {'form': form})
+    print("pp")
+    manage(request)
     # raise PermissionDenied
 
 

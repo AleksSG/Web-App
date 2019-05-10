@@ -13,7 +13,7 @@ class UserProfileInfo(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=100)
-    url_info = models.URLField(max_length=200)
+    url_info = models.URLField(max_length=200, blank=True)
 
     # def get_name(self):
     #     name = str(self.name)
@@ -30,7 +30,7 @@ class Song(models.Model):
     album = models.CharField(max_length=200)
     release_date = models.DateField(default=date.today)
     genre = models.CharField(max_length=50)
-    url_info = models.URLField(max_length=200)
+    url_info = models.URLField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name
