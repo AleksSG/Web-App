@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^special/',views.special,name='special'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^profile/(?P<username>\w+)/$',views.profile,name='profile'),
+    url(r'^delete_user/(?P<user>\w+)$', views.delete_user, name = 'delete_user'),
     url(r'^generate/$',views.generate,name='generate'),
 #    url(r'^generate/$',views.generateSongs,name='generateSongs'),
     url(r'^manage_data/$', views.manage, name= 'manage_data'),
@@ -38,5 +39,6 @@ urlpatterns = [
     url(r'^songs/(?P<pk>[0-9]+)/$', views.song_info, name='song_info'),
     #url(r'^directors/$', views.DirectorListView.as_view(), name='Director'),
     #url(r'^directors/(?P<pk>[0-9]+)$', views.DirectorDetailView.as_view(), name='Movies_Director'),
+    url(r'^add_group/$', views.add_group, name= 'add_group'),
 
 ]

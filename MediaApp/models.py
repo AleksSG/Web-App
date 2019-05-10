@@ -42,7 +42,7 @@ class SongComment(models.Model):
     content = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.name
+        return "On: " + self.song.name
 
 # class Director(models.Model):
 #     name = models.CharField(max_length=100)
