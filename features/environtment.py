@@ -9,8 +9,7 @@ from splinter.browser import Browser
 
 from MML import settings
 #export DJANGO_SETTINGS_MODULE=MML.settings
-
-os.environ["DJANGO_SETTINGS_MODULE"] = "MML.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "MediaApp.settings"
 
 class ExtendedContext(Context):
     def get_url(self, to=None, *args, **kwargs):

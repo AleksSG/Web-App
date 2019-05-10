@@ -4,7 +4,7 @@ As a user
 I want to register a review with a comment about a song.
 
 Background: There is a registered user
-  Given Exists a user "hola" with password "hola"
+  Given Exists a user "hola" with password "hola2222"
 
 Scenario: Register just a good song comment
   Given I login as user "user" with password "password"
