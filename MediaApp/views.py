@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from MediaApp.forms import UserForm, UserProfileInfoForm
+from MediaApp.forms import UserForm, UserProfileInfoForm, Groupform
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
@@ -124,6 +124,21 @@ def manage(request):
     if request.user.is_superuser:
         return render(request, 'MediaApp/manage_data.html')
     raise PermissionDenied
+
+def add_group(request):
+    print(request.method)
+    form = None
+    if request.method == 'POST':
+        form = Groupform(data=request.POST)
+        
+        if form.is_valid():
+            group = form.save()
+            print(group)
+        else:
+            print(form.errors)
+
+    return render(request, 'MediaApp/manage_data.html', {'form': form})
+    # raise PermissionDenied
 
 
 def register(request):

@@ -4,12 +4,18 @@
   <div id="add_content">
 
     <input type="radio" name="model" value="group"> Add Group <br>
-      <div id="add_group">
-        <h4>Nepe</h4>
-        <h4>Nepe</h4>
-        <h4>Nepe</h4>
-        <h4>Nepe</h4>
-        <h4>Nepe</h4>
+      <div id="add_group"
+        <div class="form-group">
+          <form action="/add_group/" class="" method="POST">
+            {% csrf_token %}
+            <label for="inputGroupName">Group name</label>
+            <input type="text" class="form-control" id="inputGroupName" placeholder="Group name" required>
+            <small class="form-text text-muted">Required</small>
+            <label for="exampleInputPassword1">Group URL</label>
+            <input type="text" class="form-control" id="inputGroupUrl" placeholder="Group URL">
+            <input type="submit" class="btn btn-primary btn_submit" value="Save">
+          </form>
+        </div>
 
       </div>
     <input type="radio" name="model" value="song"> Add Song <br>
