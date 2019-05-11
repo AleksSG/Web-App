@@ -10,6 +10,7 @@
 {% for song_comment in comments %}
     <strong>{{ song_comment.user }}</strong>
     <p>{{ song_comment.content }}</p>
+    <input type="button" value="Delete Comment" style="float: right;">
 {% empty %}
   <p>No comments here yet :(</p>
 {% endfor %}
