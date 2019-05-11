@@ -21,9 +21,6 @@ class GroupForm(forms.Form):
     group_name = forms.CharField(label="Group Name", max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Group Name'}))
     group_url = forms.CharField(label="Group URL", max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Group URL'}))
 
-
-
-
 class EditGroupForm(forms.Form):
     ed_group = forms.ModelChoiceField(queryset=Group.objects.none())
 
@@ -61,3 +58,6 @@ class EditSongFields(forms.ModelForm):
     class Meta():
         model = Song
         exclude = ()
+
+class AddCommentField(forms.Form):
+    content = forms.CharField(max_length=500, widget=forms.Textarea)

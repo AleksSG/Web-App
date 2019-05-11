@@ -75,7 +75,7 @@ For starting the admin interface, just press the button "Django admin" at the ri
 ### How to run the application on Heroku
 Currently running on https://mymedialist.herokuapp.com
 
-###### Superuser details
+**Superuser details**
 User: admin
 Password: admin
 
@@ -90,13 +90,14 @@ Our actual entities are: Group, Song, UserProfileInfo and SongComment
 The above functionalities cannot be implemented due to lack of time for the delivery deadline and some of them are too complex and unnecessary (not required).
 We reduced the functionalities to the following table, as well as with the corresponding permissions for the CRUD (Create, Read, Update, Delete):
 
-Entities | Create | Read | Update | Delete | Expanation
+   Entities | Create | Read | Update | Delete | Expanation
+------------|--------|------|--------|--------|--------------
 UserProfileInfo | anonymous_user | superuser (owner), user (owner) | - | user (owner) | Register and access to your profile
 Group | superuser | everybody | superuser | superuser | The artist of a song. Only admin can modify data
 Song | superuser | everybody | superuser | superuser | The songs. Only admin can modify data
 SongComment | user | everybody | user (own) | user (own) | Comment the songs. Admin cannot comment
 
-###### Security
+#### Security
 It is checked before an action happens (e.g.: Delete SongComment), if the actual user have the permissions shown above to perform that. In the case of modifying data, each user with admin status (superuser) can execute the operation.
 
 Another important thing, in some URL only superuser can enter (e.g.: manage data URL). It is checked if the user has superuser status.
@@ -104,7 +105,7 @@ In other cases, it is checked if a user can access to an URL not owned such as t
 
 In any case there are not enough permissions to perform an action, a 403 Forbidden code status is shown.
 
-###### Manage data section (superuser)
+#### Manage data section (superuser)
 As said before, only superusers can access to it.
 
 There are 4 buttons with some JQuery actions where each button displays a form to complete, in order to the admin's desire.
@@ -119,13 +120,13 @@ Nevertheless, it is not a logical problem because the "submit" button only appli
     1. there are NO confirmation messages!
     2. it is set ON DELETE CASCADE!
 
-###### Comment Song (registered user)
+#### Comment Song (registered user)
 Work in progress...
 
-###### Behave (test features)
+#### Behave (test features)
 Work in progress...
 
-###### Deployment in heroku
+#### Deployment in heroku
 We will deploy on https://mymedialist.herokuapp.com (not yet)
 
 **Superuser details**

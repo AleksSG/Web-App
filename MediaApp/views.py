@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields
+from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields, AddCommentField
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
@@ -184,6 +184,7 @@ def edit_group(request, pk):
                 group_model.name = edit_group_fields_form.cleaned_data['name']
                 group_model.url_info = edit_group_fields_form.cleaned_data['url_info']
                 group_model.save()
+                return HttpResponseRedirect(reverse('manage_data'))
         else:
             edit_group_fields_form = EditGroupFields(initial=initial_values)
         return render(request, 'MediaApp/edit_group.html', {'group': group_model,
@@ -210,6 +211,7 @@ def edit_song(request, pk):
                 song_model.genre = edit_song_fields_form.cleaned_data['genre']
                 song_model.url_info = edit_song_fields_form.cleaned_data['url_info']
                 song_model.save()
+                return HttpResponseRedirect(reverse('manage_data'))
         else:
             edit_song_fields_form = EditSongFields(initial=initial_values)
         return render(request, 'MediaApp/edit_song.html', {'song': song_model,
@@ -222,6 +224,50 @@ def delete_song(request, pk):
         Song.objects.filter(id = pk).delete()
         return HttpResponseRedirect(reverse('manage_data'))
     raise PermissionDenied
+
+def song_info(request, pk):
+    song = Song.objects.filter(pk = pk).first()
+    if request.user.is_authenticated and not request.user.is_superuser and request.method == 'POST':
+        comment_form = AddCommentField(data=request.POST)
+        if comment_form.is_valid():
+            content = comment_form.cleaned_data.get('content')
+            user_db = UserProfileInfo.objects.filter(user = request.user).first()
+            comment_db = SongComment(song = song, user = user_db, content = content)
+            comment_db.save()
+    else:
+        comment_form = AddCommentField()
+    song_comments = SongComment.objects.filter(song = song)[::1]
+    return render(request, 'MediaApp/song_info.html', {'song' : song,
+                                                       'comments' : song_comments,
+                                                       'comment_form': comment_form})
+
+def edit_comment(request, pk):
+    comment = SongComment.objects.filter(id = pk).first()
+    user = UserProfileInfo.objects.filter(user = request.user).first()
+    if comment.user == user:
+        initial_values={'content': comment.content}
+        if request.method == 'POST':
+            comment_form = AddCommentField(data=request.POST, initial = initial_values)
+            if comment_form.is_valid():
+                comment.content = comment_form.cleaned_data['content']
+                comment.save()
+                return HttpResponseRedirect(reverse('song_info', kwargs={'pk':comment.song.pk}))
+            else:
+                print(comment_form.errors)
+        else:
+            comment_form = AddCommentField(initial = initial_values)
+        return render(request, 'MediaApp/edit_comment.html', {'form': comment_form,
+                                                              'comment': comment})
+    return HttpResponse("<script>alert('Not owner of this comment')</script>")
+
+def delete_comment(request, pk):
+    comment = SongComment.objects.filter(id = pk).first()
+    user = UserProfileInfo.objects.filter(user = request.user).first()
+    song = comment.song
+    if comment.user == user:
+        SongComment.objects.filter(id = pk)
+        comment.delete()
+        return HttpResponseRedirect(reverse('song_info', kwargs={'pk':song.pk}))
 
 def register(request):
     registered = False
@@ -269,17 +315,6 @@ def user_login(request):
     else:
         return render(request, 'MediaApp/login.html', {})
 
-def song_info(request, pk):
-    song = Song.objects.filter(pk = pk).first()
-    song_comments = SongComment.objects.filter(song = song)[::1]
-    return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments})
-
-def delete_comment(request, pk):
-    comment = SongComment.objects.filter(id = pk)
-    if request.user == comment.user:
-        comment.delete()
-        return HttpResponseRedirect(reverse('song_info'))
-    raise PermissionDenied
 
 class GroupListView(ListView):
     model = Group
