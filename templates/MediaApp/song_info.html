@@ -1,12 +1,12 @@
 {% extends "MediaApp/index.html" %}
 {% block show_generic_list %}
-<h3>Song: {{ song.name }}</h3>
-<h4>Director: {{song.group}}</h4>
-<h4>Release date: {{song.release_date}}</h4>
-<h4>Album: {{song.album}}</h4>
-<h4>Description: {{song.description}}</h4>
-<h4>Genre: {{song.genre}}</h4>
-<a href={{song.url_info}}><h4>URL to iTunes</h4></a>
+<h3><b>Song:</b> <i>{{ song.name }}</i> </h3>
+<h4><b>Director:</b> <i>{{song.group}}</i> </h4>
+<h4><b>Release date:</b> <i>{{song.release_date}}</i> </h4>
+<h4><b>Album:</b> <i>{{song.album}}</i> </h4>
+<h4><b>Description:</b> <i>{{song.description}}</i> </h4>
+<h4><b>Genre:</b> <i>{{song.genre}}</i> </h4>
+<a href={{song.url_info}}><h4>URL to iTunes</h4> </a>
 {% for song_comment in comments %}
     <strong>{{ song_comment.user }}</strong>
     <p>{{ song_comment.content }}</p>
@@ -14,5 +14,5 @@
 {% empty %}
   <p>No comments here yet :(</p>
 {% endfor %}
-<a href="#" class="btn btn-light btn-lg active" role="button" aria-pressed="true">Add Comment</a>
+<a href="" class="btn btn-light btn-lg active" role="button" aria-pressed="true">Add Comment</a>
 {% endblock %}
