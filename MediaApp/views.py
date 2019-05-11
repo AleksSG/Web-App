@@ -273,7 +273,14 @@ def song_info(request, pk):
     song = Song.objects.filter(pk = pk).first()
     song_comments = SongComment.objects.filter(song = song)[::1]
     return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments})
-    
+
+def delete_comment(request, pk):
+    comment = SongComment.objects.filter(id = pk)
+    if request.user == comment.user:
+        comment.delete()
+        return HttpResponseRedirect(reverse('song_info'))
+    raise PermissionDenied
+
 class GroupListView(ListView):
     model = Group
 
