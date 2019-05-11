@@ -271,10 +271,9 @@ def user_login(request):
 
 def song_info(request, pk):
     song = Song.objects.filter(pk = pk).first()
-    song_comments = SongComment.objects.filter(user = user_db)[::1]
+    song_comments = SongComment.objects.filter(song = song)[::1]
     return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments})
     
-
 class GroupListView(ListView):
     model = Group
 
