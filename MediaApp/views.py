@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields
+from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
@@ -274,9 +274,11 @@ def song_info(request, pk):
     song_comments = SongComment.objects.filter(song = song)[::1]
     return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments})
 
+
 def delete_comment(request, pk):
-    comment = SongComment.objects.filter(id = pk)
-    if request.user == comment.user:
+    comment = SongComment.objects.filter(id = pk).first()
+    if userIsOwner(request,pk):
+        SongComment.objects.filter(id = pk).delete()
         comment.delete()
         return HttpResponseRedirect(reverse('song_info'))
     raise PermissionDenied
