@@ -119,8 +119,8 @@ Nevertheless, it is not a logical problem because the "submit" button only appli
     1. there are NO confirmation messages!
     2. it is set ON DELETE CASCADE!
 
-###### Comment Song (registered user)
-Work in progress...
+#### Comment Song (registered user)
+A registered user (never superuser, it will not work) can comment a song which will be shown to all the users (anonymous, registered and superusers) below the song information. Once created a comment, the owner of it can modify it (edit its content or delete it). It is checked only the owner can delete the commit. Warning: there are NO confirmation messages on operations!
 
 ###### Behave (test features)
 Work in progress...
