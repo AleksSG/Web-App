@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^manage_data/$', views.manage, name= 'manage_data'),
 
 
+
     url(r'^groups/$', views.GroupListView.as_view(), name='Group'),
     url(r'^groups/(?P<pk>[0-9]+)/$', views.GroupDetailView.as_view(), name='Songs_Group'),
     url(r'^songs/(?P<pk>[0-9]+)/$', views.song_info, name='song_info'),
