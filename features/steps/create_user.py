@@ -1,54 +1,33 @@
-
 from behave import *
+
 
 use_step_matcher("parse")
 
-@given(u'Not exists a user "user" with password "password"')
+@given(u'There is not user "user" registred')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given Not exists a user "user" with password "password"')
+    raise NotImplementedError(u'STEP: Given There is not user "user" registred')
 
-@given(u'Im not registered')
+
+@when(u'I click Register button')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given I\'m not registered')
+    raise NotImplementedError(u'STEP: When I click Register button')
 
 
-@when(u'I want to register')
+@then(u'I fill')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When I want to register')
+    raise NotImplementedError(u'STEP: Then I fill')
 
 
-@then(u'I\'m fill the data')
+@then(u'User "user" is registred')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I\'m fill the data')
+    raise NotImplementedError(u'STEP: Then User "user" is registred')
 
 
-@then(u'Now I\'m registered')
+@when(u'I register a user "user"')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then Now I\'m registered')
+    raise NotImplementedError(u'STEP: When I register a user "user"')
 
-'''
-@given(u'I\'m not registered')
+
+@then(u'I cannot register a new user "user"')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given I\'m not registered')
-
-
-@when(u'I register restaurant')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When I register restaurant')
-
-
-@then(u'I\'m fill the data')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I\'m fill the data')
-
-
-@then(u'I can not register because the user already exists')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I can not register because the user already exists')
-
-
-@then(u'I need to fill the data again but with another user')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then I need to fill the data again but with another user')
-
-'''
+    raise NotImplementedError(u'STEP: Then I cannot register a new user "user"')

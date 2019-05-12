@@ -132,3 +132,7 @@ We will deploy on https://mymedialist.herokuapp.com (not yet)
 **Superuser details**
 User: admin
 Password: admin
+
+**Other users**
+User: aleks / albert / paula / sergio / miquel
+Pass: aleks / albert / paula / sergio / miquel
