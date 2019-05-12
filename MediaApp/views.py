@@ -227,13 +227,16 @@ def delete_song(request, pk):
 
 def song_info(request, pk):
     song = Song.objects.filter(pk = pk).first()
-    if request.user.is_authenticated and not request.user.is_superuser and request.method == 'POST':
+    if request.method == 'POST':
         comment_form = AddCommentField(data=request.POST)
         if comment_form.is_valid():
-            content = comment_form.cleaned_data.get('content')
-            user_db = UserProfileInfo.objects.filter(user = request.user).first()
-            comment_db = SongComment(song = song, user = user_db, content = content)
-            comment_db.save()
+            if request.user.is_authenticated and not request.user.is_superuser:
+                content = comment_form.cleaned_data.get('content')
+                user_db = UserProfileInfo.objects.filter(user = request.user).first()
+                comment_db = SongComment(song = song, user = user_db, content = content)
+                comment_db.save()
+            else:
+                return HttpResponse("<script>alert('Can't comment')</script>")
     else:
         comment_form = AddCommentField()
     song_comments = SongComment.objects.filter(song = song)[::1]
@@ -257,7 +260,8 @@ def edit_comment(request, pk):
         else:
             comment_form = AddCommentField(initial = initial_values)
         return render(request, 'MediaApp/edit_comment.html', {'form': comment_form,
-                                                              'comment': comment})
+                                                              'comment': comment,
+                                                              'song': comment.song})
     return HttpResponse("<script>alert('Not owner of this comment')</script>")
 
 def delete_comment(request, pk):
