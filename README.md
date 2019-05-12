@@ -30,7 +30,7 @@ Moreover, we will use a Free API such as YouTube or SoundCloud to allow the poss
 * Paula Vicente - [Github: paulavicente98](http://github.com/paulavicente98)
 * Sergio Vargas - [Github: sergiovargaspuy](http://github.com/sergiovargaspuy)
 
-## Considerations for the 1st delivery
+# Considerations for the 1st delivery
 
 ### Data model documentation
 The entities are defined in the /MML/MediaApp/models.py file.
@@ -79,7 +79,7 @@ Currently running on https://mymedialist.herokuapp.com
 User: admin
 Password: admin
 
-## Considerations for the 2nd delivery
+# Considerations for the 2nd delivery
 
 ### Data model documentation
 As the main idea is the same for the previous models, we reduced to half them.
@@ -124,15 +124,14 @@ Nevertheless, it is not a logical problem because the "submit" button only appli
 A registered user (never superuser, it will not work) can comment a song which will be shown to all the users (anonymous, registered and superusers) below the song information. Once created a comment, the owner of it can modify it (edit its content or delete it). It is checked only the owner can delete the commit. Warning: there are NO confirmation messages on operations!
 
 #### Behave (test features)
-Work in progress...
+There are some features done, but we haven't been able to work the tests correctly.
 
 #### Deployment in heroku
-We will deploy on https://mymedialist.herokuapp.com (not yet)
+The application is deployed in https://mymedialist.herokuapp.com
+
+There is a superuser created (admin) and some comments done in songs (like Heartbeat, by Vicetone)
+
 
 **Superuser details**
 User: admin
 Password: admin
-
-**Other users**
-User: aleks / albert / paula / sergio / miquel
-Pass: aleks / albert / paula / sergio / miquel
