@@ -7,10 +7,11 @@
 <h4><b>Description:</b> <i>{{song.description}}</i> </h4>
 <h4><b>Genre:</b> <i>{{song.genre}}</i> </h4>
 <a href={{song.url_info}}><h4>URL to iTunes</h4> </a>
+
 {% for song_comment in comments %}
     <strong>{{ song_comment.user }}</strong>
     <p>{{ song_comment.content }}</p>
-    <input type="button" value="Delete Comment" style="float: right;">
+    <a class="btn btn-default" href="{% url 'delete_comment' pk=song_comment.pk %}" style="float: right;">Delete comment</a>
 {% empty %}
   <p>No comments here yet :(</p>
 {% endfor %}

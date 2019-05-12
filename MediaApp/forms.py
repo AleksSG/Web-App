@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfileInfo, Group, Song
+from .models import UserProfileInfo, Group, Song, SongComment
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
@@ -61,3 +61,9 @@ class EditSongFields(forms.ModelForm):
     class Meta():
         model = Song
         exclude = ()
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = SongComment
+        fields = ('user', 'content')
