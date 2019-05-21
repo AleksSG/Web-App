@@ -1,6 +1,8 @@
 {% extends "MediaApp/index.html" %}
 {% block show_generic_list %}
-<h3>Group: {{ group.name }}</h3>
+<span vocab="http://schema.org/" typeof="Restaurant">
+<h3>Group: </h3>
+<h3><span property="name">{{ group.name }}</span></h3>
 
 <div style="margin-left:20px;margin-top:20px">
   <h5>Songs</h5>
