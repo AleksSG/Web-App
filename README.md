@@ -30,7 +30,7 @@ Moreover, we will use a Free API such as YouTube or SoundCloud to allow the poss
 * Paula Vicente - [Github: paulavicente98](http://github.com/paulavicente98)
 * Sergio Vargas - [Github: sergiovargaspuy](http://github.com/sergiovargaspuy)
 
-## Considerations for the 1st delivery
+# Considerations for the 1st delivery
 
 ### Data model documentation
 The entities are defined in the /MML/MediaApp/models.py file.
@@ -79,7 +79,7 @@ Currently running on https://mymedialist.herokuapp.com
 User: admin
 Password: admin
 
-## Considerations for the 2nd delivery
+# Considerations for the 2nd delivery
 
 ### Data model documentation
 As the main idea is the same for the previous models, we reduced to half them.
@@ -127,6 +127,14 @@ Work in progress...
 
 ###### Deployment in heroku
 We will deploy on https://mymedialist.herokuapp.com (not yet)
+
+#### Behave (test features)
+There are some features done, but we haven't been able to work the tests correctly.
+
+#### Deployment in heroku
+The application is deployed in https://mymedialist.herokuapp.com
+
+There is a superuser created (admin) and some comments done in songs (like Heartbeat, by Vicetone)
 
 **Superuser details**
 User: admin

@@ -223,6 +223,54 @@ def delete_song(request, pk):
         return HttpResponseRedirect(reverse('manage_data'))
     raise PermissionDenied
 
+def song_info(request, pk):
+    song = Song.objects.filter(pk = pk).first()
+    if request.method == 'POST':
+        comment_form = AddCommentField(data=request.POST)
+        if comment_form.is_valid():
+            if request.user.is_authenticated and not request.user.is_superuser:
+                content = comment_form.cleaned_data.get('content')
+                user_db = UserProfileInfo.objects.filter(user = request.user).first()
+                comment_db = SongComment(song = song, user = user_db, content = content)
+                comment_db.save()
+            else:
+                return HttpResponse("<script>alert('Can't comment')</script>")
+    else:
+        comment_form = AddCommentField()
+    song_comments = SongComment.objects.filter(song = song)[::1]
+    return render(request, 'MediaApp/song_info.html', {'song' : song,
+                                                       'comments' : song_comments,
+                                                       'comment_form': comment_form})
+
+def edit_comment(request, pk):
+    comment = SongComment.objects.filter(id = pk).first()
+    user = UserProfileInfo.objects.filter(user = request.user).first()
+    if comment.user == user:
+        initial_values={'content': comment.content}
+        if request.method == 'POST':
+            comment_form = AddCommentField(data=request.POST, initial = initial_values)
+            if comment_form.is_valid():
+                comment.content = comment_form.cleaned_data['content']
+                comment.save()
+                return HttpResponseRedirect(reverse('song_info', kwargs={'pk':comment.song.pk}))
+            else:
+                print(comment_form.errors)
+        else:
+            comment_form = AddCommentField(initial = initial_values)
+        return render(request, 'MediaApp/edit_comment.html', {'form': comment_form,
+                                                              'comment': comment,
+                                                              'song': comment.song})
+    return HttpResponse("<script>alert('Not owner of this comment')</script>")
+
+def delete_comment(request, pk):
+    comment = SongComment.objects.filter(id = pk).first()
+    user = UserProfileInfo.objects.filter(user = request.user).first()
+    song = comment.song
+    if comment.user == user:
+        SongComment.objects.filter(id = pk)
+        comment.delete()
+        return HttpResponseRedirect(reverse('song_info', kwargs={'pk':song.pk}))
+
 def register(request):
     registered = False
     if request.method == 'POST':
