@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
@@ -330,6 +330,14 @@ def delete_comment(request, pk):
         comment.delete()
         return HttpResponseRedirect(reverse('song_info'))
     raise PermissionDenied
+
+#def rate(request, pk):
+#    song = get_object_or_404(Song, pk=pk)
+#    if SongRating.objects.filter(song=song, user=request.user).exists():
+#        SongRating.objects.get(song=song, user=request.user).delete()
+#    new_rating = RestaurantReview(rating=request.POST['rating'], comment=request.POST['comment'], user=request.user, restaurant=restaurant)
+#    new_rating.save()
+#    return HttpResponseRedirect(reverse('song_info', args=(song.id,)))
 
 class GroupListView(ListView):
     model = Group
