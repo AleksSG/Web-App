@@ -1,11 +1,16 @@
-from django.shortcuts import render
+<<<<<<< HEAD
+-   from django.shortcuts import render, get_object_or_404
+from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields, CommentForm
+=======
+from django.shortcuts import render, get_object_or_404
 from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields, AddCommentField
+>>>>>>> 8ffacc0c0d5344fd762db5dd55c3c14f45d2df9e
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Group, Song, User, UserProfileInfo, SongComment
+from .models import Group, Song, User, UserProfileInfo, SongComment, SongRating
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -184,7 +189,6 @@ def edit_group(request, pk):
                 group_model.name = edit_group_fields_form.cleaned_data['name']
                 group_model.url_info = edit_group_fields_form.cleaned_data['url_info']
                 group_model.save()
-                return HttpResponseRedirect(reverse('manage_data'))
         else:
             edit_group_fields_form = EditGroupFields(initial=initial_values)
         return render(request, 'MediaApp/edit_group.html', {'group': group_model,
@@ -211,7 +215,6 @@ def edit_song(request, pk):
                 song_model.genre = edit_song_fields_form.cleaned_data['genre']
                 song_model.url_info = edit_song_fields_form.cleaned_data['url_info']
                 song_model.save()
-                return HttpResponseRedirect(reverse('manage_data'))
         else:
             edit_song_fields_form = EditSongFields(initial=initial_values)
         return render(request, 'MediaApp/edit_song.html', {'song': song_model,
@@ -227,13 +230,16 @@ def delete_song(request, pk):
 
 def song_info(request, pk):
     song = Song.objects.filter(pk = pk).first()
-    if request.user.is_authenticated and not request.user.is_superuser and request.method == 'POST':
+    if request.method == 'POST':
         comment_form = AddCommentField(data=request.POST)
         if comment_form.is_valid():
-            content = comment_form.cleaned_data.get('content')
-            user_db = UserProfileInfo.objects.filter(user = request.user).first()
-            comment_db = SongComment(song = song, user = user_db, content = content)
-            comment_db.save()
+            if request.user.is_authenticated and not request.user.is_superuser:
+                content = comment_form.cleaned_data.get('content')
+                user_db = UserProfileInfo.objects.filter(user = request.user).first()
+                comment_db = SongComment(song = song, user = user_db, content = content)
+                comment_db.save()
+            else:
+                return HttpResponse("<script>alert('Can't comment')</script>")
     else:
         comment_form = AddCommentField()
     song_comments = SongComment.objects.filter(song = song)[::1]
@@ -256,8 +262,17 @@ def edit_comment(request, pk):
                 print(comment_form.errors)
         else:
             comment_form = AddCommentField(initial = initial_values)
-        return render(request, 'MediaApp/edit_comment.html', {'form': comment_form,
-                                                              'comment': comment})
+        song_ratings = SongRating.objects.filter(song = song)[::1]
+        total = 0
+        counter = 0
+        for rating in song_ratings:
+            total += ratings
+            counter += 1
+        average_rating = total/counter
+        return render(request, 'MediaApp/song_info.html', {'song' : song,
+                                                           'comments' : song_comments,
+                                                           'comment_form': comment_form,
+                                                           'rating' : average_rating})
     return HttpResponse("<script>alert('Not owner of this comment')</script>")
 
 def delete_comment(request, pk):
@@ -315,6 +330,27 @@ def user_login(request):
     else:
         return render(request, 'MediaApp/login.html', {})
 
+def song_info(request, pk):
+    song = Song.objects.filter(pk = pk).first()
+    song_comments = SongComment.objects.filter(song = song)[::1]
+    song_ratings = SongRating.objects.filter(song = song)[::1]
+
+    #total = 0
+    #counter = 0
+    #for rating in song_ratings:
+    #    total += ratings
+    #    counter += 1
+    #average_rating = total/counter
+
+    return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments, 'ratings' : song_ratings})
+
+#def rate(request, pk):
+#    song = get_object_or_404(Song, pk=pk)
+#    if SongRating.objects.filter(song=song, user=request.user).exists():
+#        SongRating.objects.get(song=song, user=request.user).delete()
+#    new_rating = RestaurantReview(rating=request.POST['rating'])
+#    new_rating.save()
+#    return HttpResponseRedirect(reverse('song_info', args=(song.id,)))
 
 class GroupListView(ListView):
     model = Group
