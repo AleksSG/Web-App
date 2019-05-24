@@ -238,9 +238,11 @@ def song_info(request, pk):
     else:
         comment_form = AddCommentField()
     song_comments = SongComment.objects.filter(song = song)[::1]
+    song_ratings = SongRating.objects.filter(song = song)[::1]
     return render(request, 'MediaApp/song_info.html', {'song' : song,
                                                        'comments' : song_comments,
-                                                       'comment_form': comment_form})
+                                                       'comment_form': comment_form},
+                                                       'ratings' : song_ratings)
 
 def edit_comment(request, pk):
     comment = SongComment.objects.filter(id = pk).first()
@@ -317,11 +319,19 @@ def user_login(request):
     else:
         return render(request, 'MediaApp/login.html', {})
 
-def song_info(request, pk):
-    song = Song.objects.filter(pk = pk).first()
-    song_comments = SongComment.objects.filter(song = song)[::1]
-    song_ratings = SongRating.objects.filter(song = song)[::1]
-    return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments, 'ratings' : song_ratings})
+#def song_info(request, pk):
+#    song = Song.objects.filter(pk = pk).first()
+#    song_comments = SongComment.objects.filter(song = song)[::1]
+#    song_ratings = SongRating.objects.filter(song = song)[::1]
+
+    #total = 0
+    #counter = 0
+    #for rating in song_ratings:
+    #    total += ratings
+    #    counter += 1
+    #average_rating = total/counter
+
+#    return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments, 'ratings' : song_ratings})
 
 
 def delete_comment(request, pk):
