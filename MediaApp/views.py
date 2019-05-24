@@ -260,8 +260,7 @@ def edit_comment(request, pk):
         else:
             comment_form = AddCommentField(initial = initial_values)
         return render(request, 'MediaApp/edit_comment.html', {'form': comment_form,
-                                                              'comment': comment,
-                                                              'song': comment.song})
+                                                              'comment': comment})
     return HttpResponse("<script>alert('Not owner of this comment')</script>")
 
 def delete_comment(request, pk):
@@ -332,15 +331,6 @@ def user_login(request):
     #average_rating = total/counter
 
 #    return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments, 'ratings' : song_ratings})
-
-
-def delete_comment(request, pk):
-    comment = SongComment.objects.filter(id = pk).first()
-    if userIsOwner(request,pk):
-        SongComment.objects.filter(id = pk).delete()
-        comment.delete()
-        return HttpResponseRedirect(reverse('song_info'))
-    raise PermissionDenied
 
 #def rate(request, pk):
 #    song = get_object_or_404(Song, pk=pk)

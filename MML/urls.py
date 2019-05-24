@@ -44,8 +44,8 @@ urlpatterns = [
     url(r'^delete_group/(?P<pk>[0-9]+)/$', views.delete_group, name= 'delete_group'),
     url(r'^edit_song/(?P<pk>[0-9]+)/$', views.edit_song, name= 'edit_song'),
     url(r'^delete_song/(?P<pk>[0-9]+)/$', views.delete_song, name= 'delete_song'),
-
+    url(r'^edit_comment/(?P<pk>[0-9]+)/$', views.edit_comment, name= 'edit_comment'),
     url(r'^delete_comment/(?P<pk>[0-9]+)/$', views.delete_comment, name='delete_comment')
-    
+
 
 ]

@@ -1,18 +1,29 @@
 {% extends "MediaApp/index.html" %}
 {% block show_generic_list %}
 <h3><b>Song:</b> <i>{{ song.name }}</i> </h3>
-<h4><b>Artits:</b> <i>{{song.group}}</i> </h4>
+<h4><b>Artist:</b> <i>{{song.group}}</i> </h4>
 <h4><b>Release date:</b> <i>{{song.release_date}}</i> </h4>
 <h4><b>Album:</b> <i>{{song.album}}</i> </h4>
 <h4><b>Description:</b> <i>{{song.description}}</i> </h4>
 <h4><b>Genre:</b> <i>{{song.genre}}</i> </h4>
 <a href={{song.url_info}}><h4>URL to iTunes</h4> </a>
+{% block comments %}
+<h4>Comments:</h4>
 {% for song_comment in comments %}
+{% load tag %}
+  <div class="list-group-item list-group-item-action">
     <strong>{{ song_comment.user }}</strong>
     <p>{{ song_comment.content }}</p>
-    <a class="btn btn-default" href="{% url 'delete_comment' pk=song_comment.pk %}" style="float: right;">Delete comment</a>
+
+    <a href="{% url 'edit_comment' song_comment.pk %}" class="btn btn-outline-secondary btn-sm">Edit</a>
+  </div>
 {% empty %}
   <p>No comments here yet :(</p>
 {% endfor %}
-<a href="" class="btn btn-light btn-lg active" role="button" aria-pressed="true">Add Comment</a>
+<form method="post">
+  {% csrf_token %}
+  {{ comment_form.as_p }}
+  <input type="submit" class="btn btn-light btn-lg active" value="Add Comment">
+</form>
+{% endblock %}
 {% endblock %}

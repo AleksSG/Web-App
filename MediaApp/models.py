@@ -40,7 +40,7 @@ class SongComment(models.Model):
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
     #Only registered users can comment, NOT admin
     user = models.ForeignKey(UserProfileInfo, on_delete=models.CASCADE)
-    content = models.CharField(max_length=500)
+    content = models.TextField(max_length=500)
     #text = models.TextField()
     #created_date = models.DateTimeField(default=timezone.now)
     #approved_comment = models.BooleanField(default=False)
