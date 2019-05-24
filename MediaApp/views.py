@@ -320,7 +320,8 @@ def user_login(request):
 def song_info(request, pk):
     song = Song.objects.filter(pk = pk).first()
     song_comments = SongComment.objects.filter(song = song)[::1]
-    return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments})
+    song_ratings = SongRating.objects.filter(song = song)[::1]
+    return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments, 'ratings' : song_ratings})
 
 
 def delete_comment(request, pk):
@@ -335,7 +336,7 @@ def delete_comment(request, pk):
 #    song = get_object_or_404(Song, pk=pk)
 #    if SongRating.objects.filter(song=song, user=request.user).exists():
 #        SongRating.objects.get(song=song, user=request.user).delete()
-#    new_rating = RestaurantReview(rating=request.POST['rating'], comment=request.POST['comment'], user=request.user, restaurant=restaurant)
+#    new_rating = RestaurantReview(rating=request.POST['rating'])
 #    new_rating.save()
 #    return HttpResponseRedirect(reverse('song_info', args=(song.id,)))
 
