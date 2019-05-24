@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+-   from django.shortcuts import render, get_object_or_404
 from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
@@ -238,11 +238,9 @@ def song_info(request, pk):
     else:
         comment_form = AddCommentField()
     song_comments = SongComment.objects.filter(song = song)[::1]
-    song_ratings = SongRating.objects.filter(song = song)[::1]
     return render(request, 'MediaApp/song_info.html', {'song' : song,
                                                        'comments' : song_comments,
-                                                       'comment_form': comment_form,
-                                                       'ratings' : song_ratings})
+                                                       'comment_form': comment_form})
 
 def edit_comment(request, pk):
     comment = SongComment.objects.filter(id = pk).first()
@@ -259,9 +257,17 @@ def edit_comment(request, pk):
                 print(comment_form.errors)
         else:
             comment_form = AddCommentField(initial = initial_values)
-        return render(request, 'MediaApp/edit_comment.html', {'form': comment_form,
-                                                              'comment': comment,
-                                                              'song': comment.song})
+        song_ratings = SongRating.objects.filter(song = song)[::1]
+        total = 0
+        counter = 0
+        for rating in song_ratings:
+            total += ratings
+            counter += 1
+        average_rating = total/counter
+        return render(request, 'MediaApp/song_info.html', {'song' : song,
+                                                           'comments' : song_comments,
+                                                           'comment_form': comment_form,
+                                                           'rating' : average_rating})
     return HttpResponse("<script>alert('Not owner of this comment')</script>")
 
 def delete_comment(request, pk):
@@ -319,10 +325,10 @@ def user_login(request):
     else:
         return render(request, 'MediaApp/login.html', {})
 
-#def song_info(request, pk):
-#    song = Song.objects.filter(pk = pk).first()
-#    song_comments = SongComment.objects.filter(song = song)[::1]
-#    song_ratings = SongRating.objects.filter(song = song)[::1]
+def song_info(request, pk):
+    song = Song.objects.filter(pk = pk).first()
+    song_comments = SongComment.objects.filter(song = song)[::1]
+    song_ratings = SongRating.objects.filter(song = song)[::1]
 
     #total = 0
     #counter = 0
@@ -331,7 +337,7 @@ def user_login(request):
     #    counter += 1
     #average_rating = total/counter
 
-#    return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments, 'ratings' : song_ratings})
+    return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments, 'ratings' : song_ratings})
 
 
 def delete_comment(request, pk):
