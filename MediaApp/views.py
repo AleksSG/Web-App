@@ -1,11 +1,16 @@
+<<<<<<< HEAD
 -   from django.shortcuts import render, get_object_or_404
 from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields, CommentForm
+=======
+from django.shortcuts import render, get_object_or_404
+from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields, AddCommentField
+>>>>>>> 8ffacc0c0d5344fd762db5dd55c3c14f45d2df9e
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Group, Song, User, UserProfileInfo, SongComment
+from .models import Group, Song, User, UserProfileInfo, SongComment, SongRating
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -338,15 +343,6 @@ def song_info(request, pk):
     #average_rating = total/counter
 
     return render(request, 'MediaApp/song_info.html', {'song' : song, 'comments' : song_comments, 'ratings' : song_ratings})
-
-
-def delete_comment(request, pk):
-    comment = SongComment.objects.filter(id = pk).first()
-    if userIsOwner(request,pk):
-        SongComment.objects.filter(id = pk).delete()
-        comment.delete()
-        return HttpResponseRedirect(reverse('song_info'))
-    raise PermissionDenied
 
 #def rate(request, pk):
 #    song = get_object_or_404(Song, pk=pk)
