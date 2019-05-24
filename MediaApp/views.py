@@ -5,7 +5,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Group, Song, User, UserProfileInfo, SongComment
+from .models import Group, Song, User, UserProfileInfo, SongComment, SongRating
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -227,19 +227,24 @@ def delete_song(request, pk):
 
 def song_info(request, pk):
     song = Song.objects.filter(pk = pk).first()
-    if request.user.is_authenticated and not request.user.is_superuser and request.method == 'POST':
+    if request.method == 'POST':
         comment_form = AddCommentField(data=request.POST)
         if comment_form.is_valid():
-            content = comment_form.cleaned_data.get('content')
-            user_db = UserProfileInfo.objects.filter(user = request.user).first()
-            comment_db = SongComment(song = song, user = user_db, content = content)
-            comment_db.save()
+            if request.user.is_authenticated and not request.user.is_superuser:
+                content = comment_form.cleaned_data.get('content')
+                user_db = UserProfileInfo.objects.filter(user = request.user).first()
+                comment_db = SongComment(song = song, user = user_db, content = content)
+                comment_db.save()
+            else:
+                return HttpResponse("<script>alert('Can't comment')</script>")
     else:
         comment_form = AddCommentField()
     song_comments = SongComment.objects.filter(song = song)[::1]
+    song_ratings = SongRating.objects.filter(song = song)[::1]
     return render(request, 'MediaApp/song_info.html', {'song' : song,
                                                        'comments' : song_comments,
-                                                       'comment_form': comment_form})
+                                                       'comment_form': comment_form,
+                                                       'ratings' : song_ratings})
 
 def edit_comment(request, pk):
     comment = SongComment.objects.filter(id = pk).first()
