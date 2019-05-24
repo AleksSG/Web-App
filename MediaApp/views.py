@@ -1,5 +1,5 @@
--   from django.shortcuts import render, get_object_or_404
-from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields, CommentForm
+from django.shortcuts import render, get_object_or_404
+from MediaApp.forms import UserForm, UserProfileInfoForm, GroupForm, SongForm, EditGroupForm, EditGroupFields, EditSongForm, EditSongFields, CommentForm, AddCommentField
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, HttpResponse

@@ -13,6 +13,7 @@
    <p>{% for song_rating in ratings %}
         <p>Rating:  You gave a rating of <span id="count"> {{song_rating.rating}} star(s)</p>
    {% endfor %}
+   <p>Average: {{ average_rating }}</p>
    </p>
 <input type="submit" value="Rate" />
 {% endblock %}
