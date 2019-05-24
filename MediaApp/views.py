@@ -243,9 +243,11 @@ def song_info(request, pk):
     else:
         comment_form = AddCommentField()
     song_comments = SongComment.objects.filter(song = song)[::1]
+    song_ratings = SongRating.objects.filter(song = song)[::1]
     return render(request, 'MediaApp/song_info.html', {'song' : song,
                                                        'comments' : song_comments,
-                                                       'comment_form': comment_form})
+                                                       'comment_form': comment_form,
+                                                       'ratings' : song_ratings})
 
 def edit_comment(request, pk):
     comment = SongComment.objects.filter(id = pk).first()

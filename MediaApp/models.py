@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
 from django.urls import reverse
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class UserProfileInfo(models.Model):
@@ -51,6 +52,11 @@ class SongComment(models.Model):
     def __str__(self):
         return "On: " + self.song.name
 
+class SongRating (models.Model):
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfileInfo, on_delete=models.CASCADE)
+    rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(0)])
+    unique_together=(('song', 'user'),)
 # class Director(models.Model):
 #     name = models.CharField(max_length=100)
 #
