@@ -62,8 +62,5 @@ class EditSongFields(forms.ModelForm):
         model = Song
         exclude = ()
 
-class CommentForm(forms.ModelForm):
-
-    class Meta:
-        model = SongComment
-        fields = ('user', 'content')
+class AddCommentField(forms.Form):
+    content = forms.CharField(max_length=500, widget=forms.Textarea)
