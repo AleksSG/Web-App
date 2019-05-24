@@ -7,6 +7,16 @@
 <h4><b>Description:</b> <i>{{song.description}}</i> </h4>
 <h4><b>Genre:</b> <i>{{song.genre}}</i> </h4>
 <a href={{song.url_info}}><h4>URL to iTunes</h4> </a>
+
+{% block ratings %}
+
+   <p>{% for song_rating in ratings %}
+        <p>Rating:  You gave a rating of <span id="count"> {{song_rating.rating}} star(s)</p>
+   {% endfor %}
+   </p>
+<input type="submit" value="Rate" />
+{% endblock %}
+
 {% block comments %}
 <h4>Comments:</h4>
 {% for song_comment in comments %}
