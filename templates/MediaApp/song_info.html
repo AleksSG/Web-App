@@ -1,19 +1,24 @@
 {% extends "MediaApp/index.html" %}
 {% block show_generic_list %}
-<h3><b>Song:</b> <i>{{ song.name }}</i> </h3>
-<h4><b>Artits:</b> <i>{{song.group}}</i> </h4>
-<h4><b>Release date:</b> <i>{{song.release_date}}</i> </h4>
-<h4><b>Album:</b> <i>{{song.album}}</i> </h4>
-<h4><b>Description:</b> <i>{{song.description}}</i> </h4>
-<h4><b>Genre:</b> <i>{{song.genre}}</i> </h4>
+
+<span  vocab="http://schema.org/"  typeof="MusicRecording">
+
+<h3><b>Song:</b> <i><span  property="name">{{ song.name }} </span> </i> </h3>
+<h4><b>Artits:</b> <i><span  property="byArtist">{{song.group}}</span></i> </h4>
+<h4><b>Release date:</b> <i><span  property="datePublished">{{song.release_date}}</span></i> </h4>
+<h4><b>Album:</b> <i><span  property="inAlbum">{{song.album}}</span></i> </h4>
+<h4><b>Description:</b> <i><span  property="description">{{song.description}}</span></i> </h4>
+<h4><b>Genre:</b> <i><span  property="genre">{{song.genre}}</span></i> </h4>
 <a href={{song.url_info}}><h4>URL to iTunes</h4> </a>
+
 {% block comments %}
 <h4>Comments:</h4>
 {% for song_comment in comments %}
 {% load tag %}
   <div class="list-group-item list-group-item-action">
-    <strong>{{ song_comment.user }}</strong>
-    <p>{{ song_comment.content }}</p>
+    <span  property="review" typeof="Review">
+    <strong><span  property="author">{{ song_comment.user }}</span></strong>
+    <p><span  property="reviewBody"> {{ song_comment.content }}</span></p>
 
     <a href="{% url 'edit_comment' song_comment.pk %}" class="btn btn-outline-secondary btn-sm">Edit</a>
   </div>
