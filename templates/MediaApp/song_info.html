@@ -16,9 +16,9 @@
 {% for song_comment in comments %}
 {% load tag %}
   <div class="list-group-item list-group-item-action">
-    <span  property="review" typeof="Review">
+    <span  property="comment" typeof="Comment">
     <strong><span  property="author">{{ song_comment.user }}</span></strong>
-    <p><span  property="reviewBody"> {{ song_comment.content }}</span></p>
+    <p><span  property="text"> {{ song_comment.content }}</span></p>
 
     <a href="{% url 'edit_comment' song_comment.pk %}" class="btn btn-outline-secondary btn-sm">Edit</a>
   </div>
