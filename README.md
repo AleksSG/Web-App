@@ -135,3 +135,10 @@ There is a superuser created (admin) and some comments done in songs (like Heart
 **Superuser details**
 User: admin
 Password: admin
+
+
+# Considerations for the 3rd delivery
+The templade which includes semantic markup is **song_info.html**. The domain entity is Song.
+
+The screenshots that show the Warnings and Errors by Google	Structured Data Testing Tool (https://search.google.com/structured-­data/testing-­tool) and the schema made by http://rdfa.info/play/
+are on the **screenshots directory** in this repository.
