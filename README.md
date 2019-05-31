@@ -142,3 +142,6 @@ The templade which includes semantic markup is **song_info.html**. The domain en
 
 The screenshots that show the Warnings and Errors by Google	Structured Data Testing Tool (https://search.google.com/structured-­data/testing-­tool) and the schema made by http://rdfa.info/play/
 are on the **screenshots directory** in this repository.
+
+![Google Schema testing Tool](https://github.com/AleksSG/Web-App/blob/master/screenshots/noerrors.png)
+![RDFA](https://github.com/AleksSG/Web-App/blob/master/screenshots/esquema.png)
