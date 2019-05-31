@@ -73,7 +73,7 @@ For visitting the application as a user, write in the browser the url "localhost
 For starting the admin interface, just press the button "Django admin" at the right of the navbar, or go to the url "localhost:8000/admin".
 
 ### How to run the application on Heroku
-Currently running on https://mymedialist.herokuapp.com
+Currently running on https://mymedialist3.herokuapp.com/
 
 **Superuser details**
 User: admin
